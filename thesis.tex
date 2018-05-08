@@ -1,45 +1,952 @@
-""
-Bar chart demo with pairs of bars grouped for easy comparison.
-"""
-import numpy as np
-import matplotlib.pyplot as plt
+\documentclass[sigconf]{acmart}
+
+\input{format/final}
+
+\begin{document}
+\title{Modeling Opioid Pain Reliever Misuse and Abuse}
+
+  \author{Sean M. Shiverick}
+  \affiliation{%
+  \institution{Indiana University Bloomington}
+}
+\email{smshiver@iu.edu}
+
+\renewcommand{\shortauthors}{S.M. Shiverick}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{abstract}
+This project identified demographic characteristics and environmental factors 
+as determinants of opioid pain reliever misuse and abuse.
+
+This study examined demographic features, medications, and illicit drug use 
+as determinants of pain reliever misuse and abuse using data from the National 
+Survey on Drug Use and Health (2015-16). Weighted least squares (WLS) regression
+was conducted with a subset of N=6,964 respondents who reported misuse and abuse 
+of prescription opioids. Age group, sex, marital status, and education
+level were negatively related to pain reliever misuse and abuse, indicating that
+some demographic features may be protective of opioid misuse. By contrast, use of 
+medications and illicit drugs were positively related to pain reliever misuse 
+and abuse. Use of any opioid pain relievers and tranquilizers was significantly
+related to pain reliever misuse and abuse across age groups. Use of cocaine and 
+amphetamines was more influential than heroin use in predicting pain reliever 
+misuse and abuse; however, these effects varied by age group. Heroin use was 
+significantly related to pain reliever misuse and abuse for individuals between 
+the ages of 18 and 49 years. Use of amphetamines was significantly related to 
+pain reliever misuse and abuse for individuals between 12 and 35 years of age. 
 
 
-n_groups = 5
+The result indicate risk factors related to opioid addiction and overdose death. 
+\end{abstract}
 
-means_men = (20, 35, 30, 35, 27)
-std_men = (2, 3, 4, 1, 2)
+\keywords{Supervised Learning, General Linear Model, Opioid Addiction}
 
-means_women = (25, 32, 34, 20, 25)
-std_women = (3, 5, 2, 3, 3)
+\maketitle
 
-fig, ax = plt.subplots()
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
 
-index = np.arange(n_groups)
-bar_width = 0.35
+Over the past two decades, prescription opioid misuse, abuse, and addiction 
+in the U.S. has become a major crisis with serious public health consequences.
+In 2015, an estimated 2 million Americans suffered from substance use disorders 
+related to opioid pain medications such as oxycodone and hydrocodone 
+\cite{nida18,cdc18}. Of patients legitimately prescribed opioids for chronic 
+pain, approximately 25\% misused them, between 8\% to 12\% became addicted, and 
+4\% to 6\% transitioned to heroin \cite{vowles15, carlson16}. Opioid dependence 
+and addiction are chronic health conditions; following treatment, many addicted 
+individuals are at high risk for relapse and overdose death \cite{shaham03}. 
+Since 1999, the number of overdose deaths from prescription opioids has more 
+than quadrupled \cite{cdc16}. The economic cost of the opioid crisis since 2001 
+is estimated to exceed one trillion dollars \cite{altarum18}. Past studies have 
+identified risk factors for opioid abuse, including gender, ethnicity, comorbid
+psychological disorders, and non-opioid drug abuse \cite{yokell13,rice12}.
+Rates of hospitalization for prescription opiate overdose (POD) are higher for 
+females than males, and the increase in POD is highest for Whites compared to 
+Blacks or Hispanics \cite{unick13}. Supply-based interventions to reduce the 
+availability of prescription opioids have produced a shift to heroin use, and 
+the exponential increase in POD and heroin overdose deaths (HOD) are correlated
+\cite{jones15,reifler12}. The non-medical use of prescription opioids may also 
+vary by age \cite{mccabe12}. The present study modeled the relationships 
+between demographic features, medications, and illicit drugs as predictors of 
+pain reliever misuse and abuse using. Identifying factors which are negatively 
+related with pain reliever misuse may reveal preventative characteristics that 
+decrease opioid dependence and addiction. Models of pain reliever misuse and 
+abuse are compared across age groups. 
 
-opacity = 0.4
-error_config = {'ecolor': '0.3'}
 
-rects1 = plt.bar(index, means_men, bar_width,
-                 alpha=opacity,
-                 color='b',
-                 yerr=std_men,
-                 error_kw=error_config,
-                 label='Men')
 
-rects2 = plt.bar(index + bar_width, means_women, bar_width,
-                 alpha=opacity,
-                 color='r',
-                 yerr=std_women,
-                 error_kw=error_config,
-                 label='Women')
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-plt.xlabel('Group')
-plt.ylabel('Scores')
-plt.title('Scores by group and gender')
-plt.xticks(index + bar_width / 2, ('A', 'B', 'C', 'D', 'E'))
-plt.legend()
+\subsection{The Model}
+Many past studies used logistic regression to analyze the probability that an 
+individual ‘i’ abused or misused opioids (or did not), [8, 9, 10, 12]. 
+A logistic regression model takes the form:
 
-plt.tight_layout()
-plt.show()
+, where Xij represents a matrix of patient j independent variables, and  and  represent the slope and intercept parameters to be estimated by the model [8]. It was hypothesized that prescription opioid misuse and abuse should be assessed as a continuous measure rather than a discrete outcome. By creating aggregated variables, taken as the sum of several related binary responses from a large national survey, we used OLS regression to estimate the relative contribution of demographic and environmental factors to the misuse and abuse of opioid pain relievers. It was predicted that some personal characteristics may lead to a decrease in MUPO. 
+
+
+
+Theories of addiction suggest that situational cues or events can elicit a 
+motivational state underlying relapse, as addictive behavior are reinstated by 
+exposure to drugs, drug-related cues, or environmental stressors \cite{shaham03}. 
+
+
+
+
+ Past studies have 
+primarily used logistic regression to analyze the predicted probability that 
+an individual abused or misused opioids. The present study assessed the misuse 
+and abuse prescription opioids (MUPO) as a continuous measure rather than a 
+discrete outcome, using aggregated variables created by summing related binary 
+responses from a large national survey. It was hypothesized that personal 
+characteristics may play a protective role in reducing MUPO, whereas 
+environmental factors (i.e. prior medication or drug use) would be associated 
+with increased risk for MUPO, for some individuals. 
+
+
+
+The abuse of prescription opioid medication in the U.S. has become a major 
+health crisis of epidemic proportions \cite{volkow14}. Over 2 million Americans 
+were dependent or abused prescription opioids such as oxycodone or hydrocodone 
+in 2014\cite{cdc17}. Overdose deaths from prescription opioids have quadrupled 
+since 1999, resulting in more than 180,000 deaths between 1999 to 2015 
+\cite{nida17, cdc16}. For millions of people struggling with substance abuse, 
+addiction and relapse are chronic health conditions \cite{boyer10}. Drug 
+addiction has many similar characteristics to other chronic medical illnesses,
+but there are unique challenges to the treatment of addiction. For example, 
+a lack of continuity in the treatment of addiction leaves persons in recovery 
+at high risk of relapse. After undergoing detoxification in a rehabilitation 
+treatment programs, addicted individuals are released back into the same 
+environments associated with their drug use \cite{johnson11}. Addicted persons 
+seeking treatment often relapse at night, or on weekends, when treatment 
+centers are unavailable. Furthermore, many people with severe addiction end up 
+at emergency rooms for crisis interventions following drug overdose. Theories 
+of addiction suggest that situational cues or events can elicit a motivational 
+state underlying relapse, as addictive behavior are reinstated by exposure 
+to drugs, drug-related cues, or environmental stressors \cite{shaham03}. 
+Little is known about demographic characteristics related to opioid addiction 
+\cite{zedler14}; however, past research suggests that patients reporting to 
+emergency rooms following opioid overdoses suffered from comorbid mental health 
+disorders, circulatory and respirator diseases \cite{yokell13}. 
+
+
+
+
+
+Our model estimates the impact of demographic and environmental factors, including marital status, education level, health problems, mental health, drug treatment or mental health treatment, medications (pain relievers, tranquilizers, sedatives), and illicit drugs (heroin, cocaine, amphetamines) on the misuse of prescription opioids (MUPO), while control for variability due to different age groups.  
+
+2.1 Theoretical Basis
+As described in the introduction, our model includes an aggregated measure of MUPO as the dependent variable based on the self-reported non-medical use of prescription opioids not directed by a physician, use of pain relievers in amounts greater than prescribed, misuse of pain relievers in the past year or month, dependence or abuse of pain relievers, and use of pain relievers to get “high”. Previous research indicates that non-medical use and misuse of prescription opioids varies by age group, and therefore age group is included as a covariant in the model; however, we try to control for the effect of age by examining constancy of variance across age groups (e.g., homoscedasticity).  
+
+2.2 Data Description and Data Sources
+Data from the National Survey on Drug Use and Health (NSDUH) for 2015 and 2016 was downloaded from the Substance Abuse and Mental Health Data Archive (SAMHDA)[13]. The NSDUH is large scale, comprehensive survey with 2,666 variables; a sample of approximately 90 variables was selected, including demographic information (age category, sex, marital status, education level, employment, size of metropolitan area). Responses for related discrete variables (i.e., No=0 / Yes=1) were summed to create aggregated variables, for any health problems ever: 'HEALTH'  = (STD + Hepatitis + HIV + Cancer + Hospitalized). Similarly, and overall mental health (`MENTHLTH`) included adult major depressive episode, emotional distress, suicidal thoughts, or suicidal plans. 
+The dependent variable, pain reliever misuse and abuse, (`PRLMISAB`) included responses to prescription opioid pain misuse, abuse, dependency, and past year use, misuse or abuse. Any prescription opioids medications taken in past year (e.g., Hydrocodone, Oxycodone, Tramadol, Morphine, Fentanyl, Oxymorphone, Demerol, Hydromorphone), were summed to create a single variable (`PRLANY`). Only respondents who indicated past opioid pain reliever use were selected for inclusion in the sample; 13,916 respondents from the NSDUH-2015, 11690 respondents from the NSHUH-2016 were merged to create a single data set with a total N=25,606 respondents, as pooled, cross-sectional data. Aggregated variables were created for past use of: Tranquilizers, Sedatives, Heroin, Cocaine, Amphetamines, Hallucinogens, Drug Treatment, and Mental Health Treatment, resulting in a total of 16 variables [14]. 
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \subsection{The Model}
+
+
+
+\subsection{OLS and Weighted Least Square Regression} 
+
+Linear models make a prediction using a linear function of the input features
+\cite{muller17}. The standard linear model, given in equation 1, describes the
+relationship between predicted target variable (Y) from a set of features 
+(X[1] ... X[p]), with some measure of error . 
+
+\begin{equation}
+  \ Y/X = \beta[1]/X*X[1] + \beta[2]/X*X[2] +... + \beta[p]/X*X[p] + \epsilon
+\end{equation}
+
+The predicted value of the target outcome can be thought of as the weighted 
+sum of the input features with the weights or coefficients (i.e., beta values) 
+indicating the influence of a given feature on the outcome. In the number of
+observations ('n') is much larger than the number of features ('p'), ordinary 
+least squares estimates will have low variance, and perform well on test
+observations. If n is not much larger than p high variability in the least
+squares fit can result in overfitting and poor prediction on test observations.
+For high-dimensional datasets, where p is much greater than n, the least
+squares coefficient estimate breaks down. The simple linear model can be
+improved by using alternative fitting approaches that produce better 
+prediction accuracy and model interpretability \cite{statlearn13}. 
+
+Three
+important methods for improving the linear model fit are (a) subset selection,
+(b) dimension reduction, and (c) regularization or shrinkage. This paper 
+focuses on regularization which includes all p predictor features in the
+linear model, but constrains or regularizes the coefficient estimates, 
+effectively by shrinking them towards zero. Regularization reduces variablity 
+which improves test set accuracy with a slight increase in bias. In many cases, 
+multiple features in a regression analysis are not associated with the target
+response; shrinking the coefficient estimates of irrelevant features to zero 
+reduces overfitting and provides a more interpretable model. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Data Description} 
+
+The data for this study was obtained from the National Survey on Drug Use 
+and Health for 2015. The NSDUH-2015 is a comprehensive survey that covers 
+all aspects of substance use, misuse, dependency, and abuse, including 
+questions related to both prescription medications and illicit drugs, drug 
+dependency, addiction, and treatment, education level, employment, physical 
+health, depression, and mental health treatment. 
+
+
+
+Data obtained from the National Survey on Drug Use and health (NSDUH 2015-2016) 
+consisted of N=24964 individuals who had used prescription opioid pain relievers. 
+Pain reliever misuse and abuse (PRLMA) was regressed on a selection of nine 
+demographic variables, prescription medications, and illicit drugs . 
+The initial OLS model revealed issues of heteroscedasticity and autocorrelation 
+due to model specification; to correct for heteroscedasticity, parameter 
+estimates were obtained using Weighted Least Squares (WLS), controlling for 
+the cross-sectional variable Age Group. The dependent variable, Pain Reliever 
+Misuse and Abuse (PRLMA) was bimodal, with 74\% of individuals reporting they 
+had never misused opioids. A subset of N=6478 observations was selected that 
+represented individuals who reported misusing or abusing pain relievers. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Project Goals} 
+
+The purpose of the study was to identify demographic characteristics and
+environmental factors (e.g., medications, drug use) as determinants of opioid
+pain reliever misuse and abuse. It was hypothesized that factors negatively 
+related to the dependent variable may play a preventive role in decreasing
+opioid misuse and abuse. For example, pain reliever misuse and abuse was 
+expected to decrease with increasing age. It was also predicted that illicit 
+drug use would be positively related to misuse of prescription opioids, and 
+specifically that heroinuse would be highly correlated with pain reliever 
+misuse and abuse. The analysis focused on individuals who reported misusing 
+and abusing pain relievers in the past. Regression models were constructed 
+across age groups to examine how the influence of predictors changed for 
+individuals of different ages. 
+
+This study 
+applies supervised machine learning models to identify the set of demographic 
+characteristics and mental health attributes that predict prescription opioid 
+misuse and abuse. The data for the study was obtained from a large national 
+survey on drug use and health (NSHUH-2015) \cite{samhsa16}. 
+
+The data were fitted using several models, including general 
+linear models, decision trees, and random forests. This method can help to 
+address prescription opioid dependency and addiction in the following ways: 
+(i) Identify demographic factors related to prescription opioid abuse, (ii) 
+Identify associations between prescription opioid misuse and abuse and 
+illicit drug use, (iii) Identify the model that gives the best accuracy
+for predicting new observations, and provides an interpretable solution. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Method}
+
+The following steps were included in the project workflow pipeline: 
+(1) Download and extract the data, (2) Data cleaning and preparation, 
+(3) Exploratory data analysis, (4) Data visualization, (5) Analysis of 
+learning models for opioid pain reliever misuse and abuse.
+
+\subsection{Data} 
+
+
+
+Data from the NSDUH-2015 was downloaded from the Substance Abuse and Mental 
+Health Data Archive (SAMHDA) 
+\cite{samhsa16} URL using Python. The data files were extracted as a data 
+frame object using Pandas, and the data was written to CSV file for 
+examination. The dataset consists of 57,146 observations with 2,666 features 
+representing individual-level responses from a survey of the U.S. population. 
+According to the NSDUH codebook, sampling was weighted across states by 
+population size for a representative distribution selected from 6,000 area 
+segments. The sample design used five state sample size groups, drawing more 
+heavily from the eight states with the largest population (e.g., CA, FL, IL, 
+MI, NY, OH, PA, TX) which together account for 48 percent of the total U.S. 
+population aged 12 or older.  All identifying information in the survey was
+collapsed (e.g., age categories) and state identifiers were removed from the 
+public use file to ensure confidentiality. The NSDUH public-use files do not 
+include geographic location, or demographic variables related to ethnicity or 
+immigration status. The weighted survey screening response rate was 81.94 
+percent and the weighted interview response rate was 71.2 percent. 
+
+\begin{table*}[ht]
+  \caption{Summary of Variables in Initial Data Set (16 Independent Variables)}
+  \label{tab:freq}
+  \begin{tabular}{ll}
+    \toprule
+    \textit{Dependent Variable} & Label \\
+    \midrule
+    Prescription Opioid Pain Reliever Misuse and Abuse (0-12 Scale)& PRLMISAB  \\
+    \midrule
+    \textit{Demographic Variables}&   \\
+    \midrule
+    Age Category (1=12-17 years, 2=18-25, 3=26-34, 4=35-49, 5=50 and older)& AGECAT \\
+    Biological Sex (0=Male, 1=Female)& SEX  \\
+    Marital Status (0=Unmarried, 1=Divorced, 2=Widowed, 3=Married)& MARRIED  \\
+    Education (1=Less H.S., 2=H.S. Grad., 3=Some College,  4=College Grad.)& EDUCAT  \\
+    Size of City/Metropolitan Region (1=Rural, 2=Small, 3=Large)& CTYMETRO  \\
+    Health Problems Aggregated  (0-10 scale)& HEALTH  \\
+    Mental Health, Aggregated: adult depression, emotional distress (0-10 scale)& MENTHLTH  \\
+    Treatment for Drugs and Alcohol in past year, Aggregated (0-5 scale)& TRTMENT  \\
+    Mental Health Treatment, Aggregated (Likert scale, 1-10)& MHTRTMT  \\
+    \midrule
+    \textit{Medication and Drug Use Variables}& \\
+    \midrule
+    Any Prescribed Opioid Pain Reliever Use in past year, Aggregated (1-10 scale)& PRLANY  \\
+    Tranquilizer use, past year, Aggregated (Likert scale, 0-5)& TRQLZRS \\
+    Sedative use, past year, Aggregated (0-5 scale)& SEDATVS  \\
+    Heroin use, past year, Aggregated (0-5 scale)& HEROINUSE  \\
+    Cocaine and Crack Cocaine Use in past year, Aggregated  (0-5 scale)& COCAINE  \\
+    Amphetamine and Methamphetamine Use in past year, Aggregated (0-5 scale)& AMPHETMN  \\
+    Hallucinogen Use in past year, Aggregated (0-5 scale)& HALUCNG \\
+    \bottomrule
+  \end{tabular}
+\end{table*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Data Cleaning and Preparation }
+
+\subsubsection{Data Cleaning}
+All steps of this analysis were completed in a python interactive notebook 
+based on examples from \emph{Python for Data Analysis} \cite{mckinney17}. 
+After saving the NSDUH-2015 as a data frame object, the dataset was subset 
+by columns to include demographic characteristics (e.g., age category, sex, 
+marital status, education, employment status, and category of metropolitan 
+area), measures of physical health (e.g., overall health, STDs, Hepatitis, 
+HIV, Cancer, hospitalization), mental health (e.g., Adult Depression, severe
+Emotional Distress, Suicidal Thoughts, Plans), Pain Reliever (`PRL`) 
+Medication Use, Misuse, and Abuse (over past year, past month), Prescription 
+Opioid Medications Taken in Past year (e.g., Hydrocodone, Oxycodone, Tramadol, 
+Morphine, Fentanyl, Oxymorphone, Demerol, Hydromorphone), Heroin Use, Abuse 
+(over past year, past month), Tranquilizer Use, Sedative Use, Cocaine Use, 
+Amphetamine and Methamphetamine Use, Hallucinogen Use, Drug Treatment (e.g., 
+Inpatient, Outpatient, Hospital, Mental Health Clinic, ER, Drug Treatment 
+Status), and Mental Health Treatment History. A codebook was created to 
+provide a complete list of variables included with summaries of response 
+categories. The following steps were taken to detect and remove 
+inconsistencies in the data:
+\begin{enumerate}
+  \item Remove missing values (i.e., NaN) 
+  \item Recode blanks, non-responses, or legitimate skips (e.g., 99, 991, 
+  993) to zero  
+  \item Recode dichotomous responses (e.g., Yes=1 / No=2) so that No=0
+  \item Recode categorical variables to be consistent with amount or degree 
+  (e.g., 1=low, 2=med, 3=high)
+   \item Rename selected variables for better description (e.g., 
+   Adult Major Depressive Episode Lifetime changed from AMDELT to DEPMELT)
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Aggregated Variables}
+
+The majority of features were represented as dichotomous Yes / No variables; 
+therefore, related features were summed to create aggregated variables. 
+For example, overall health, STDs, Hepatitis, HIV, Cancer, and overnight
+hospitalization, were aggregated to create a single measure, 'HEALTH'. The 
+health measure was recoded so that higher scores indicated better health. 
+Questions related to adult major depressive episode, emotional distress, 
+suicidal thoughts, and suicidal plans, were summed to create a single mental 
+health variable (`MENTHLTH`) with scores ranging from 0 to 9. Responses to 
+pain reliever (`PRL`) medication use, misuse, abuse, or dependency, were 
+aggregated to create a single variable of pain reliever misuse or abuse 
+(`PRLMISAB`). Any prescription painkiller medications used in the past year 
+were summed into a single variable (`PRLANY`). Similarly, all related responses 
+were summed to create single variables for Tranquilizers, Sedatives, Cocaine, 
+Amphetamines, Hallucinogens, Drug Treatment, and Mental Health Treatment. 
+The target outcome was any prescription opioid pain reliever medication misuse 
+or abuse, `PRLMISAB`. The demographic characteristics and aggregated variables 
+were subset and saved to a new data frame consisting of 22 features and 57,146 
+observations, which was exported to CSV file entitled `project-data.csv`. 
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Results}
+
+\subsection{Exploratory Data Analysis}
+
+The initial sample consisted of 25,606 observations. Preliminary examination 
+of the data revealed 174 outliers that exceeded the range of the dependent 
+variable and were excluded, resulting in a sample of N=25,432 (10655 male, 
+14777 female). Overall, the majority of individuals (73\%) reported never 
+misusing or abusing prescription opioids; a subset of N=6,964 individuals 
+reported misusing prescription opioids (i.e., "MUPO") at some point. Figure 1 
+shows that the proportion of pain reliever misuse or abuse was highest for 
+individuals between 18 to 25 years of age. In general, pain reliever misuse 
+and abuse was higher among younger than older age groups. More women (61\%)
+than men (39\%) reported using any opioid pain relievers, but equal proportions 
+of men and women (50\%) reported pain reliever misuse and abuse. Table 2 
+provides summary statistics of aggregated variables measured on a scale for 
+both the full sample and the MUPO subset. The mean and standard deviation for 
+the dependent variable are more robust in the MUPO subset than the full sample.  
+
+\begin{table*}[ht]
+  \caption{Summary Statistics for Aggregated Variables for Full Sample and 
+  Subset of Individuals Reporting Misuse and Abuse of Prescription Opioids (MUPO)}
+  \label{tab:freq}
+  \begin{tabular}{llllllll}
+    \toprule
+     & Full Sample& (N = 25,432)&&& MUPO Subset& (N = 6,946)&  \\
+    \midrule
+    Variables & Mean& S.D.& Median& Range& Mean& S.D.& Median  \\
+    \midrule
+    PRL Misuse Abuse& 1.74& 3.30& 0& 12& 6.38& 3.11 & 7 \\
+    Health Problems& 2.77& 1.15& 3& 7& 2.71& 1.11& 3  \\
+    Mental Health& 1.57& 2.37& 0& 12& 2.21& 2.71& 1  \\
+    Drug Treatment& 0.15& 0.89& 0& 10& 0.43& 1.48& 0  \\
+    MH Treatment& 0.37& 0.86& 0& 7& 0.48& 0.97& 0  \\
+    Any PRL Use& 1.61& 1.06& 1& 10& 1.93& 1.37& 1 \\
+    Tranquilizer Use& 0.60& 1.22& 0& 5& 1.05& 1.42& 0  \\
+    Sedative Use& 0.12& 0.50& 0& 5& 0.18& 0.62& 0  \\
+    Heroin Use& 0.10& 0.49& 0& 5& 0.30& 0.85& 0  \\
+    Cocaine use& 0.38& 0.80& 0& 5& 0.83& 1.10& 0 \\
+    Amphetamines& 0.32& 0.72& 0& 5& 0.73& 1.04& 0  \\
+    Hallucinogens& 0.65& 1.16& 0& 5& 1.42& 1.47& 1  \\
+    \bottomrule
+  \end{tabular}
+\end{table*}
+
+
+Figure 1 shows the proportion of individuals who reported misusing prescription 
+opioid pain relievers and also using heroin. The left column of the Figure 1 
+shows the majority of respondents (89 percent) stated they had never misused 
+opioid pain medication or used heroin, although 10 percent reported misusing 
+opioid pain medication at some point. The right panel of Figure 1 shows that, 
+of those individuals who reported using heroin, the proportion who reported 
+misusing opioid pain medication was roughly twice as large as the proportion 
+who reported only using heroin. This is consistent with the hypothesized 
+link misuse of prescription opioids and heroin use.
+
+\begin{figure}[!ht]
+  \centering\includegraphics[width=\columnwidth]{images/Figure1.pdf}
+  \caption{Proportion of Individuals Reporting Opioid Pain Reliever Misuse 
+  or Abuse (PRLMA) by Age Group}
+  \label{f:Figure1}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Figure 2 shows the aggregated measure of Opioid Pain Reliever misuse and abuse 
+plotted against the aggregated measure of Heroin use (which includes misuse, 
+abuse, lifetime use, past year use, 30 day use), with weighted regression 
+lines grouped by size of City Metropolitan region (from none to large). 
+The largest proportion of the sample who report prescription opioid misuse, 
+abuse, and heroin use is represented by observations from large metropolitan 
+areas (red circles) with large population size. However, a small number of
+observations from rural or small metropolitan regions (blue and green circles)
+showed very high rates of prescription opioid misuse and abuse. Regression 
+lines (i.e., line of best fit) shown are weighted by the City/Metro
+region attribute, with a steeper slope shown for smaller metropolitan regions 
+than large metropolitan regions. The difference in slope may be due to the 
+influence of the small number of outliers who had high degrees of prescription 
+opioid misuse, and heroin use. The plot also shows a clear divide on the y-axis,
+which separates the sample according to high and low or no prescription opioid 
+misuse, although the continuum of heroin use from no, low, to high is 
+distributed fairly evenly along the x-axis. 
+
+\begin{figure}[!ht]
+  \centering\includegraphics[width=\columnwidth]{images/Figure2.pdf}
+  \caption{Proportion of Males and Females Who Report Opioid Pain Misuse 
+  and Abuse}
+  \label{f:Figure2}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Figure 3 
+
+; only 956 respondents had used heroin (570 males, 
+386 females). 
+ A very 
+small proportion of the entire sample reported both misusing and abusing 
+prescription opioids and using heroin, but this is a group of interest. The 
+last column of the second row shows the individuals reporting high levels of 
+opioid misuse and abuse were distributed evenly across city/metropolitan areas 
+of different sizes, with only slightly higher numbers for small cities or 
+rural areas. As stated above, only few participants reported using heroin, and 
+of these, the majority were from large metropolitan areas. Finally, the sample 
+seems to have slightly higher proportions from small and large metropolitan 
+areas, which is likely due to weighted sampling, which drew more from heavily 
+populated regions.
+
+\begin{figure}[!ht]
+  \centering\includegraphics[width=\columnwidth]{images/Figure3.pdf}
+  \caption{Pairplots of Mental Health, Prescription Opioid Misuse and Abuse,
+  Heroin Use, and Size of City Metropolitan Areaand Proportion Who Reported Using Heroin}
+  \label{f:Figure3}
+\end{figure}
+
+
+shows the pairplots of demographic features including mental health
+(higher scores equal to more depression), Prescription Opioid Pain Reliever
+(PRL) Medication (aggregated), Heroin Use (aggregated measure), and Size of 
+City/Metropolitan region. The top row shows that the majority of the sample 
+reported no mental health concerns, whereas a small proportion of the sample 
+reported depression, emotional distress, or suicidal thoughts. Only few people 
+self-described as high in depression reported low Prescription Opioid PRL 
+misuse and abuse. The plot also reveals that prescription opioid misuse and 
+heroin use were distributed approximately evenly for individuals reporting 
+either low, moderate, or high levels of depression, which suggests that 
+depression was not a factor in predicting opioid misuse. The second row shows 
+a small number of individuals from rural areas or small cities who reported 
+very high levels of prescription opioid misuse, although the majority of 
+respondents misusing or abusing prescription opioid were from large 
+metropolitan areas. As described above, the majority of respondents (about
+90 percent of the sample) reported they had never misused prescription 
+opioids. In the second row and third and fourth columns, a natural break is 
+seen between individuals who reported high levels of prescription opioid 
+misuse and abuse and those who reported very low or no opioid misuse.
+
+%\begin{figure}[!ht]
+%  \centering\includegraphics[width=\columnwidth]{images/Figure4.pdf}
+%  \caption{Diagnostic Plots of Residuals for the Multiple Regression of
+%  Prescription Opioid Pain Reliever Misuse and Abuse}
+%  \label{f:Figure4}
+%\end{figure}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Weighted Least Squares (WLS) Regression Models}
+
+All models were constructed using R in Rstudio following examples in 
+\emph{An Introduction to Statistical Learning with Applications in R} 
+\cite{statlearn13}. After loading the project data into R (with 57146 rows, 
+22 columns), some additional data cleaning was performed to prepare the 
+dataset for analysis. The ID column was deleted, two binomial variables were 
+removed (e.g, PRLMISEVR, HEROINEVR), and frequency of heroin use (HEROINFQY) 
+was excluded because it represented very few participants and was highly skewed. 
+The dataset was split into the training set and test sets. A general linear 
+model was fit with opioid pain relievers misuse and abuse (PRLMISAB) as the 
+target variable, and with the following 18 variables entered as predictors: 
+AGECAT, SEX, MARRIED, EDUCAT, EMPLOYED, CTYMETRO, HEALTH, MENTHLTH, SUICATT,
+PRLANY, HEROINUSE, TRQLZRS, SEDATVS, COCAINE, AMPHETMN, TRTMENT, MHTRTMT. 
+The results of the regression revealed that AGECAT, SEX, EMPLOYED, HEALTH, 
+MNTLHLTH, PRLANY, HEROINUSE, TRQLZRS, SDATVS, COCAINE, AMPHETMN, and TRTMENT, 
+together significantly predicted opioid pain reliever misuse and abuse 
+PRLMISAB (p < 0.001). Figure 4 shows the diagnostic plots of residuals from 
+the multiple regression. The QQ plot in the upper right panel indicates that 
+the dataset is approximately normal, but there may be a non-linear trend 
+in the data. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{table*}[ht]
+  \caption{Weighted Least Squares (WLS) Parameter Estimates for Regression 
+  of Pain Reliever Misuse and Abuse}
+  \label{tab:freq}
+  \begin{tabular}{lllllll}
+    \toprule
+     & Full Sample& (N = 25,432)&& MUPO Subset& (N = 6,946)&  \\
+    \midrule
+    Variables & Estimate& S.E.& t-value& Estimate& S.E.& t-Value  \\
+    \midrule
+    Intercept& 1.656***& 0.083& 19.85& 6.870***& 0.154& 44.72 \\
+    Age Category& \textbf{-0.370}& 0.028& -13.23& \textbf{-0.312}***& 0.059& -5.31 \\
+    Sex& \textbf{-0.156}***& 0.039& -4.03& \textbf{-0.154}***& 0.069& -2.24  \\
+    Married& \textbf{-0.041}**& 0.021& -2.02& \textbf{-0.159}***& 0.039& -4.03  \\
+    Education& -0.028& 0.020& -1.41& \textbf{-0.123}***& 0.037& -3.36 \\
+    City/Metro Size& -0.016& 0.025& -0.67& 0.017& 0.043& 0.40 \\
+    Health Problems& -0.021& 0.019& -1.12& -0.041& 0.034& -1.22 \\
+    Mental Health& \textbf{0.059}***& 0.011& 5.22& -0.022& 0.018& -1.25 \\
+    Drug Treatment& \textbf{0.190}***& 0.025& 7.61& -0.13& 0.024& -0.57 \\
+    MH Treatment& \textbf{-0.143}***& 0.033& -4.39& 0.017& 0.029& 0.33 \\
+    Any PRL Use& \textbf{0.252}***& 0.020& 12.62& \textbf{0.290}***& 0.029& 9.87 \\
+    Tranquilizer Use& \textbf{0.447}***& 0.021& 21.40& \textbf{0.116}***& 0.029& 4.05 \\
+    Sedative Use& \textbf{0.192}***& 0.039& 4.95& 0.043& 0.053& 0.81 \\
+    Heroin Use& \textbf{0.358}***& 0.055& 6.52& \textbf{0.258}***& 0.059& 4.36 \\
+    Cocaine Use& \textbf{0.350}***& 0.035& 9.95& \textbf{0.103}***& 0.043& 2.38 \\
+    Amphetamines& \textbf{0.780}***& 0.030& 25.93& \textbf{0.232}***& 0.037& 6.23 \\
+    Hallucinogens& \textbf{0.576}***& 0.023& 25.66& 0.006& 0.030& 0.21 \\
+    \bottomrule
+    Significance level:& **0.05,& ***0.01&&&&
+  \end{tabular}
+\end{table*}
+
+
+\begin{table}
+  \caption{WLS Parameter Estimates for Final Model of Pain Reliever Misuse and Abuse 
+  with MUPO Subset (N=6964)}
+  \label{tab:freq}
+  \begin{tabular}{llll}
+    \toprule
+    Variable & Estimate& S.E.& t-Statistic \\
+    \midrule
+    Intercept& 6.850***& 0.098& 69.69 \\
+    Age Category& \textbf{-0.327}***& 0.058& -5.64 \\
+    Sex& \textbf{-0.170}**& 0.067& -4.02 \\
+    Married& \textbf{-0.158}***& 0.039& -4.02 \\
+    Education& \textbf{-0.130}***& 0.034& -3.81 \\
+    Any PRL Use& \textbf{0.289}***& 0.029& 9.98 \\
+    Tranquilizer Use& \textbf{0.114}***& 0.028& 4.14 \\
+    Heroin Use& \textbf{0.244}***& 0.057& 4.24 \\
+    Cocaine Use& \textbf{0.102}**& 0.04& 9.95 \\
+    Amphetamines& \textbf{0.231}***& 0.036& 6.36 \\
+    \bottomrule
+    Significance level:& **0.05,& ***0.01&
+  \end{tabular}
+\end{table}
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{table*}[ht]
+  \caption{Comparison of OLS Parameter Estimates for Regression of Pain Reliever 
+  Misuse and Abuse by Age Group (with Standardized Estimates)}
+  \label{tab:freq}
+  \begin{tabular}{llllll}
+    \toprule
+      & & & Age Group& &  \\
+    \midrule
+    Variables & 12-17& 18-25& 26-35& 36-49& 50+  \\
+    \midrule
+    Intercept& 6.156***& 6.147***& 5.774***& 5.227***& 5.859*** \\
+           & -& -& -& -& - \\
+    Sex& 0.229& \textbf{-0.474}***& \textbf{-0.701}***& -0.019& \textbf{-0.433}***  \\
+           & (0.045)& (-0.083)& (-0.115)& (-0.003)& (-0.070) \\
+    Married& 0.127& \textbf{-0.300}***& -0.081& -0.057& -0.126  \\
+           & (0.022)& (-0.096)& (-0.037)& (-0.024)& (-0.045) \\
+    Education& 0& -0.065& -0.120& \textbf{-0.159}*& \textbf{-0.352}*** \\
+           &        & (-0.020)& (-0.037)& (-0.049)& (-0.119) \\
+    Any PRL Use& \textbf{0.184}**& \textbf{0.390}***& \textbf{0.367}***& \textbf{0.435}***& \textbf{0.406}***  \\
+           & (0.090)& (0.171)& (0.153)& (0.169)& (0.153) \\
+    Tranquilizer Use& \textbf{0.010}***& \textbf{0.159}***& \textbf{0.192}***& \textbf{0.187}***& \textbf{0.242}*** \\
+           & (0.005)& (0.080)& (0.085)& (0.080)& (0.097) \\
+    Heroin Use& 0.183& \textbf{0.196}***& \textbf{0.314}***& \textbf{0.446}***& 0.089  \\
+           & (0.024)& (0.054)& (0.098)& (0.103)& (0.018) \\
+    Cocaine Use& 0.227& 0.086& -0.073& -0.045& 0.142  \\
+           & (0.064)& (0.032)& (-0.026)& (-0.015)& (0.048) \\
+    Amphetamines& \textbf{0.306}***& \textbf{0.170}***& \textbf{0.201}***& 0.143& -0.083  \\
+           & (0.120)& (0.063)& (0.066)& (0.043)& (-0.020) \\
+    \midrule
+    \textit{n}       & 685& 2259& 1506&  1380& 648 \\
+    \textit{Percent} & 10.56& 34.87& 23.24& 21.3& 10 \\ 
+    \textit{F-test}  & 4.50*** & 30.52***& 18.56***& 15.17***& 6.52***  \\ 
+    \textit{R-square}& 0.0444& 0.0979& 0.0902& 0.0813& 0.0755 \\ 
+    \textit{Adj. R-square}& 0.0346 & 0.0947& 0.0845& 0.076& 0.0639 \\
+    \bottomrule
+    Significance level:&  **0.05,& ***0.01& &
+  \end{tabular}
+\end{table*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsubsection{Ridge Regression and the L2 Penalty} 
+
+The predicted value of the target outcome can be thought of as the weighted 
+sum of the input features with the weights or coefficients (i.e., beta values) 
+indicating the influence of a given feature on the outcome. In the number of
+observations ('n') is much larger than the number of features ('p'), ordinary 
+least squares estimates will have low variance, and perform well on test
+observations. If n is not much larger than p high variability in the least
+squares fit can result in overfitting and poor prediction on test observations.
+For high-dimensional datasets, where p is much greater than n, the least
+squares coefficient estimate breaks down. The simple linear model can be
+improved by using alternative fitting approaches that produce better 
+prediction accuracy and model interpretability \cite{statlearn13}. 
+
+Three
+important methods for improving the linear model fit are (a) subset selection,
+(b) dimension reduction, and (c) regularization or shrinkage. This paper 
+focuses on regularization which includes all p predictor features in the
+linear model, but constrains or regularizes the coefficient estimates, 
+effectively by shrinking them towards zero. Regularization reduces variablity 
+which improves test set accuracy with a slight increase in bias. In many cases, 
+multiple features in a regression analysis are not associated with the target
+response; shrinking the coefficient estimates of irrelevant features to zero 
+reduces overfitting and provides a more interpretable model. 
+
+
+
+Similar to least squares, ridge regression seeks coefficient estimates that
+fit the data well by reducing error, but ridge regression introduces a 
+shrinkage penalty (L2) that has the effect of shrinking the coefficient 
+estimates towards zero. When the tuning parameter (lambda) is set to zero, 
+the shrinkage penalty has no effect and ridge regression produces the least
+squares estimates. As the tuning parameter lambda increases, values of the 
+ridge regression coefficients approach zero \cite{statlearn13}. Selecting a 
+good value of the tuning parameter lambda is important, as ridge
+regression will produce a different set of coefficients for each new value of 
+lambda. It is important to note that the shrinkage penalty is applied to every
+features, but not to the intercept (beta[0]). The advantage of ridge 
+regressions over least squares is based on the bias-variance tradeoff. As 
+the tuning parameter lambda increases, flexibility of the ridge regression 
+decreases, leading to decreased variance but increased bias. Ridge regression 
+is often applied after standardizing the predictor variables so that they are 
+all on the same scale (e.g., M=0, SD=1). Ridge regression performs 
+well with high-dimensional datasets (p>>n) by trading off a small increase
+in bias for a large decrease in variance. A disadvantage of ridge regression 
+is that, because it includes all predictors in the model, the penalty shrinks
+the coefficients toward zero, but does not set any of them exactly to zero, 
+which can create a problem for model interpretation with a dataset that
+has a very large number of predictor variables. The Lasso is a relatively
+recent approach to overcome this limitation. 
+
+
+The glmnet package was used to fit the ridge regression and lasso models. 
+The glmnet() function does not use model formula language (e.g., `y ~ x`), 
+so the 'x' matrix of predictors and target vector 'y' were passed to the 
+model. The model.matrix() function produced a matrix corresponding to the 
+18 predictors and automatically transformed any qualitative variables into
+dummy variables. The `alpha` parameter in the glmnet() function determines 
+what kind of model is fit: alpha=0 is used to fit ridge regression. 
+By default, the glmnet() function performs ridge regression for an 
+automatically selected range of lambda values (e.g., 100). The glmnet 
+function also standardizes the variables so they are all on the same scale.
+Figure 5 shows the coefficients of predictors in the ridge regression model 
+with the log values of lambda plotted on the x-axis. As the values of lambda 
+become very large, the coefficient values are shrunk towards zero, but 
+never equal exactly to zero. Cross-validation was used to select the best 
+value of lambda, which was a value around 0. The features with the highest 
+coefficient values were Substance Treatment, followed by Heroin Use, 
+Amphetamine Use, Any Pain Reliever Use, and Cocaine Use. 
+
+%\begin{figure}[!ht]
+%  \centering\includegraphics[width=\columnwidth]{images/Figure5.pdf}
+%  \caption{Coefficients of Predictors in Ridge Regression Model as a 
+%  Function of Log Values of Lambda}
+%  \label{f:Figure5}
+%\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{The Lasso and the L1 Penalty} 
+
+ll models were constructed using R in Rstudio following examples in 
+\emph{An Introduction to Statistical Learning with Applications in R} 
+\cite{statlearn13}. After loading the project data into R (with 57146 rows, 
+22 columns), some additional data cleaning was performed to prepare the 
+dataset for analysis. The ID column was deleted, two binomial variables were 
+removed (e.g, PRLMISEVR, HEROINEVR), and frequency of heroin use (HEROINFQY) 
+was excluded because it represented very few participants and was highly skewed. 
+The dataset was split into the training set and test sets. A general linear 
+model was fit with opioid pain relievers misuse and abuse (PRLMISAB) as the 
+target variable, and with the following 18 variables entered as predictors: 
+AGECAT, SEX, MARRIED, EDUCAT, EMPLOYED, CTYMETRO, HEALTH, MENTHLTH, SUICATT,
+PRLANY, HEROINUSE, TRQLZRS, SEDATVS, COCAINE, AMPHETMN, TRTMENT, MHTRTMT. 
+The results of the regression revealed that AGECAT, SEX, EMPLOYED, HEALTH, 
+MNTLHLTH, PRLANY, HEROINUSE, TRQLZRS, SDATVS, COCAINE, AMPHETMN, and TRTMENT, 
+together significantly predicted opioid pain reliever misuse and abuse 
+PRLMISAB (p < 0.001). Figure 4 shows the diagnostic plots of residuals from 
+the multiple regression. The QQ plot in the upper right panel indicates that 
+the dataset is approximately normal, but there may be a non-linear trend 
+in the data
+
+
+The lasso and ridge regression have similar formulations, but the lasso has a 
+major advantage over ridge regression as it produces simpler, more interpretable
+models based on a subset of features. The lasso uses an L1 penalty which has the 
+effect of forcing some of the coefficient estimates to be equal exactly to zero 
+when the tuning parameter lambda is sufficiently large \cite{statlearn13}. Thus, 
+the lasso performs variable selection, and produces sparse models based on a 
+subset of the features, which are generally easier to interpret than ridge 
+regression. In this sense, the lasso is similar to best subset selection, as it
+tries to find the set of coefficient estimates that lead to the smallest RSS. 
+Selecting a good value of the tuning parameter lambda is important, and cross-
+validation is used to choose an optimal value. In terms of the bias-variance
+tradeoff, the lasso is qualitatively similar to ridge regression. As lambda
+increases, the variances decreases and bias increases somewhat; however, the
+variance of ridge regression is slightly lower than the variance of the loasso.
+The lasso implicitly assumes that a number of the feature coefficients or
+weight truly equal to zero. In general, the lasso can be expected to perform
+better than ridge regression in situations where a small number of features
+account for most of the variability in the target outcome, and the remaining
+features have coefficients that are very small or equal to zero. Ridge 
+regression performs better when the target is a function of a large number of 
+predictors that contribute approximately equal coefficients. Cross-validation
+can be used to determine which approach is better for a given problem. 
+
+
+
+\subsection{The Lasso (L1 Penalty)}
+
+The Lasso model was fit using the glmnet() function with alpha=1. The model
+automatically calculates correlation estimates for a wide range of lambda
+values. Figure 4 show the coefficients plotted as a function of the log
+value of lambda. As the values of lambda becomes very large, many of the 
+coefficients are shrunk to be exactly equal to zero. The associated error 
+of the lasso is very similar to ridge regression, but the lasso has an 
+advantage over ridge regression in that the resulting coefficient estimates 
+are sparse, and only a subset of the predictors are selected in the model. 
+Cross-validation was used to select the best value of lambda, which 
+revealed that a log value of lambda equal to -2.5 in the optimal range.
+
+%\begin{figure}[!ht]
+%  \centering\includegraphics[width=\columnwidth]{images/Figure6.pdf}
+%  \caption{Coefficients of Predictors in the Lasso as a Function of 
+%  Log Values of Lambda}
+%  \label{f:Figure6}
+%\end{figure}
+
+Figure 7 plots the fraction of deviance explained (i.e., variance accounted 
+for) of the coefficients of predictors in the lasso model. As seen in 
+Figure 7, a model that includes five predictors (TREATMENT, HEROINUSE, 
+COCAINE, AMPHETAMINES, PRLANY) accounts for approximately 20 percent of the 
+variability in opioid pain reliever misuse and abuse. Adding additional 
+predictors to the model does not increase the fraction of deviance explained, 
+and could likely result in a model that would overfit the data. In a model 
+with five predictors, substance treatment and heroin use have the highest 
+coefficient values. This reveals a positive relationship between pain reliever 
+misuse, abuse, and drug treatment; respondents who reported misusing and 
+abusing prescription opioid pain relievers also were likely to be or have
+received drug treatment. As hypothesized, the positive relationship between 
+opioid pain relievers misuse and abuse of and heroin use indicates that
+individuals who reported using heroin were also likely to misuse and abuse 
+opioid pain medication. There is additional evidence of modest relationships 
+between illicit drug use, cocaine and amphetamines, and the misuse and abuse 
+of opioid pain relievers. Figure 7 shows that the fraction of deviance
+explained did not improve by adding additional features.
+
+%\begin{figure}[!ht]
+%  \centering\includegraphics[width=\columnwidth]{images/Figure7.pdf}
+%  \caption{Coefficients and Fraction of Deviance Explained for Predictors
+%  in the Lasso Model}
+%  \label{f:Figure7}
+%\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Discussion}
+
+The results showed that prescription opioid use, misuse, and abuse in this 
+sample was higher than use of illicit opioids such as heroin and fentanyl. 
+The use of Hydrocodone (Vicodan) was double that of Oxycodone (Oxycodone) 
+across almost all age groups. Illicit drug use was highest between the ages 
+of 18 to 25. Almost twice as many young adults reported a need for substance 
+use treatment, but had not received treatment, compared to the youngest age 
+group. Of individuals who reported misusing prescription opioid medications, 
+twice as many said they had used heroin than had not (see Figure 1), which is 
+consistent with the hypothesis that prescription opioid misuse is associated 
+with heroin use. The different learning models provided different estimates 
+of the features important for predicting pain reliever misuse and abuse. 
+The multiple regression showed multiple features together significantly 
+predicted pain reliever abuse, but there may be non-linear trends in the data.
+Compared to ridge regression, the lasso performed variable selection, 
+indicating that a model with five features (Treatment, Heroin, Cocaine, 
+Amphetamine, Any Pain Relievers) explained a significant portion of
+variabilty in pain reliever abuse, and adding more factors did not improve
+the performance greatly. The regression tree model created a solution
+with four features (Treatment, Cocaine, Heroin, Tranquilizers), and the
+random forest regression selected Tranquilizers as most informative of
+pain reliever misuse, which is consistent with the results of the gradient
+boosting model tree ensemble (shown in Table 3). Overall, the models 
+agreed in selecting the top five most influential predictors of pain
+reliever abuse, but there was some variation in the ordering of importance. 
+The linear models showed that substance treatment had the highest
+coefficients (followed by heroin use), whereas the tree ensemble methods
+indicated that tranquilizer use was the most important feature. Given the 
+relatively low rates of prescription opioid and heroin use in the sample, 
+additional evidence is needed to clarify questions regarding the importance
+of various features for predicting opioid misuse and abuse. 
+ 
+Survey research 
+provides data on a wide range of issues that people may be reluctant to 
+disclose, including mental health disorders, personal medical issues, 
+prescription medications, and illicit drug use. Responses to surveys may be 
+biased to some degree, and it can be difficult to obtain reliable information 
+about illicit or illegal behaviors, but the anonymity of survey response are 
+designed to preserve confidentiality and can help to assure more accurate 
+disclosures. 
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Limitations}
+
+A limitation of the study is that only a small proportion of the sample 
+reported having used or misused prescription opioids. It is possible that the 
+level of opioid use in the sample was not representative of opioid use in the 
+general population. According to the Centers for Disease Control, the rate
+of heroin use in the general population of adults is 2.6 percent, whereas
+the rate of heroin use in the NSDUH-2015 sample was 1.6 percent \cite{cdc16}. 
+Obtaining reliable information about medication consumption can be difficult 
+based on self-reports. Survey data can be biased by under-reporting or by 
+minimizing reports of illicit substance use. People may also be reluctant to 
+disclose mental health issues or health problems (e.g., STDs, HIV, suicide 
+attempts). Another consideration is that, owing to the nature of the methods 
+used in the study, it was not possible to determine the direction of the 
+relationship between prescription opioid use and heroin use. Individuals who 
+misuse or abuse prescription opioid medications may turn to synthetic opioids 
+or heroin as cheaper, more readily available than prescription medications. 
+Alternatively, individuals who used heroin may be inclined to abuse 
+prescription opioids based on availability. Past research has shown that drug 
+dosage and medication type play a significant role in opioid misuse: Treatment 
+with high daily dose opioids (e.g., more than 120 mg/ day) and short-acting 
+schedule II opioids increases the risk of misuse, abuse, and drug overdose 
+\cite{sullivan10}. The results of the present analysis showed that demographic 
+characteristics played a relatively minor role compared to the use of illicit 
+drugs or tranquilizers. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusion}
+
+A general conclusion is that people who reported misusing prescription opioids 
+were also likely to have received substance treatment. More than any other 
+demographic features, a history of prescription medication use, or illicit drug 
+use, both seemed to contribute highly to the abuse of pain reliever medications, 
+particularly for those who reported using tranquilizers, heroin, cocaine, or 
+amphetamines. The findings suggest that the opioid crisis may be driven by the 
+widespread availability of prescription medications. Even for people with no 
+previous history of mental health issues, exposure to highly addictive opioid 
+medications puts people at risk for drug dependency and addiction. As mentioned 
+in the introduction, even for those who have been in drug treatment programs, 
+a lack of continuity in treatment can leave many people in recovery at risk 
+for relapse or possible overdose as they are released back into environments 
+associated with their drug use. The sharp increase in overdose deaths in the 
+U.S. due to synthetic opioids (other than methadone) has coincided with the 
+increased availability of illicitly manufactured fentanyl \cite{nida17}. 
+Because the dosage levels and potency of illicit opioids are largely unknown, 
+there is greater risk of drug overdose death. Recent findings suggest the 
+opioid overdose epidemic is getting worse, and requires urgent action to prevent 
+opioid abuse, addiction, and death. The findings reported here seek to raise 
+awareness about the risk factors for prescription opioid addiction for patients 
+and health care providers in order to help reduce opioid overdose deaths. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{table}
+  \caption{Frequency Table of Mental Health Issues and Treatment NSDUH 2015
+  \cite{samhsa16}}
+  \label{tab:freq}
+  \begin{tabular}{cccccc}
+    \toprule
+    Age Group & 12-17& 18-25& 26-34& 35-49& 50+\\
+    \midrule
+    In Hospital Overnight& 730& 1149& 821& 890& 1173 \\
+    Adult Depression& 0& 2413& 1395& 1766& 967 \\
+    \midrule
+    Mental Health Treatment& & & & & \\
+    \midrule
+    Private Therapist& 0& 592& 434& 554& 311 \\
+    Treatment Gap*& 469& 931& 321& 239& 90 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ACM-Reference-Format
+\bibliographystyle{unsrt}
+\bibliography{report} 
+
+
+\end{document}
