@@ -3,7 +3,8 @@
 \input{format/final}
 
 \begin{document}
-\title{Modeling Opioid Pain Reliever Misuse and Abuse}
+\title{Contributions of Demographic Features, Medications, and Illicit Drugs 
+to Opioid Pain Reliever Misuse and Abuse}
   \author{Sean M. Shiverick}
   \affiliation{
   \institution{Indiana University-Bloomington}
@@ -17,34 +18,33 @@
 \begin{abstract}
   
 The misuse and abuse of prescription opioids (MUPO) is influenced by both 
-personal characteristics and environmental factors. Aggregated measures of 
-pain reliever use, misuse, and abuse, demographic factors, medications, and 
-illicit drugs, were constructed using data from the National Survey on Drug 
-Use and Health (NSDUH 2015-16). Weighted Least Squares (WLS) regression of 
-pain reliever misuse and abuse was conducted with a subset of \textit{N} = 
-6,946 individuals who self-reported MUPO. Age, sex, marital status, and 
-education level were negatively related to pain reliever misuse and abuse,
-whereas use of medications and illicit drugs were positively related to 
-PRLMISAB. Overall, individuals who were older, female, married, with a higher
-level of education were less likely to misuse and abuse opioid pain relievers 
-than their counterparts. The effects of demographic factors varied by age group. 
-Past use of any opioid pain relievers or tranquilizers significantly predicted 
-PRLMISAB across all age groups. Overall, the proportion of PRLMISAB was higher 
-among individuals who had used heroin than those who had not; however, use of 
-cocaine and amphetamines were more influential predictors of PRLMISAB than 
-heroin. The relation between illicit drug use and PRLMISAB also varied by age 
-group. Heroin was a significant predictor of PRLMISAB between 18 to 49 years; 
-use of amphetamines significantly predicted PRLMISAB between 12 to 35 years. 
-These findings suggest that some demographic characteristics could be 
-preventative of opioid misuse, and may contribute to resilience in overcoming 
-opioid abuse and addiction. \footnote{\textit{Sean Shiverick} is with the 
-School of Informatics and Computing. This project was completed in partial 
-fulfillment of requirements for the Master's in Data Science program at 
-IU-Bloomington in May, 2018. Address correspondence to: smshiver@iu.edu}
+personal and environmental factors. Aggregated measures of pain reliever use, 
+misuse, and abuse, demographic factors, use of medications, and illicit drugs, 
+were constructed using data from the National Survey on Drug Use and Health 
+(NSDUH 2015-2016). Weighted Least Squares (WLS) regression of pain reliever 
+misuse and abuse (PRLMISAB) was conducted with a subset of \textit{N} = 6,946 
+individuals who self-reported MUPO. Age, sex, marital status, and education 
+level were negatively related to PRLMISAB, whereas use of medications and 
+illicit drugs were positively associated with PRLMISAB. Individuals who were 
+older, female, married, with more education were less likely to misuse and 
+abuse opioid pain relievers than their counterparts. The effects of these 
+demographic factors varied by age group. Use of any opioid pain relievers 
+predicted PRLMISAB across all age groups, followed by tranquilizer use. 
+Overall, the proportion of PRLMISAB was higher among individuals who had used 
+heroin than those who had not; however, cocaine and amphetamines were more 
+influential predictors of PRLMISAB than heroin. The relation between illicit 
+drug use and PRLMISAB also varied by age group. Heroin predicted PRLMISAB 
+between 18 to 49 years; use of amphetamines significantly predicted PRLMISAB 
+between 12 to 35 years. Some demographic features may play a role in
+helping to prevent or decrease opioid misuse, and contribute to resilience 
+in overcoming opioid abuse and addiction. \footnote{\textit{Sean Shiverick} 
+is with the School of Informatics and Computing. This project was completed in 
+partial fulfillment of requirements for the Master's in Data Science program 
+at IU-Bloomington in May, 2018. Address for correspondence: smshiver@iu.edu}
 
 \end{abstract}
 
-\keywords{Opioid Misuse, Pain Reliever Abuse, Linear Regression Models}
+\keywords{Modeling, Opioid Misuse, Pain Reliever Abuse, Linear Regression}
 
 \maketitle
 
@@ -65,22 +65,22 @@ Since 1999, the number of overdose deaths from prescription opioids has more
 than quadrupled \cite{cdc16}. The economic cost of the opioid crisis since 2001 
 is estimated to exceed one trillion dollars \cite{altarum18}. 
 
-Past studies have identified gender, ethnicity, psychological disorders, and 
-non-opioid drug abuse as risk factors for opioid abuse \cite{yokell13,rice12}. 
-Rates of hospitalization for prescription opiate overdose (POD) are higher for 
-females than males, and the increase in POD is highest for Whites compared to 
-Blacks or Hispanics \cite{unick13}. Supply-based interventions to reduce the 
-availability of prescription opioids have produced a shift to heroin use, and 
-the exponential increase in POD and heroin overdose deaths (HOD) are correlated 
-\cite{jones15,reifler12}. This study examined the relationships between 
-demographic features, medications, and illicit drugs as predictors of pain 
-reliever misuse and abuse. Identifying factors which are negatively correlated
-with pain reliever abuse may reveal personal characteristics that prevent or
-decrease opioid dependence and addiction. This approach suggests that personal 
-factors may contribute to resilience in overcoming opioid abuse and addiction. 
-Past research indicates that non-medical use of prescription opioids also varies 
-by age \cite{mccabe12}; and models of pain reliever misuse are compared across 
-age groups.
+Previous studies have identified several risk factors for opioid abuse, 
+including, but not limited to: gender, ethnicity, comorbid psychological 
+disorders, and non-opioid drug abuse \cite{yokell13,rice12,zedler14}. Rates of 
+hospitalization for prescription opiate overdose (POD) are higher for females 
+than males, and the increase in POD is highest for Whites compared to Blacks or 
+Hispanics \cite{unick13}. Supply-based interventions to reduce the availability 
+of prescription opioids have produced a shift to heroin use, and the exponential 
+increase in POD and heroin overdose deaths (HOD) are correlated 
+\cite{jones15,reifler12}. The current study examined the contributions of 
+demographic features, use of medications, and illicit drugs as predictors of 
+pain reliever misuse and abuse. It was hypothesized that personal 
+characteristics may play a role in resisting or overcoming opioid dependence 
+and addiction. According to this view, some individuals may be more resilient 
+than others in recovering from opioid abuse and addiction. Insofar as the 
+non-medical use of prescription opioids also varies by age \cite{mccabe12}, 
+models of pain reliever misuse and abuse were compared across age groups.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -121,17 +121,23 @@ age groups.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\subsection{Modeling Pain Reliever Misuse and Abuse}
+
 Many researchers have analyzed the probability that an individual abused 
 or misused opioids (or did not) with logistic regression 
-\cite{rice12, unick13, jones15, mccabe12}. The logistic model takes the form:
-$ Pr(abuse=1) = F(\alpha+\sum_j(\beta_i*X_ij)) $, where the dependent variable
-is a binary outcome. In the present study, pain reliever misuse and abuse was 
-assessed along a continuum by aggregating responses for several related binary 
-responses into a single measure. Similarly, responses for related independent 
-measures were summed, creating several aggregated variables as regressors in a 
-linear regression model rather than a logit model. The general linear model 
-(Ordinary Least Squares) estimates the coefficients of the independent 
-variables in relation to the dependent variable, with some degree of error. 
+\cite{rice12, unick13, jones15, mccabe12, zedler14}. The logistic model takes
+a binary variable as the outcome, with the following form: $ Pr(abuse=1) = 
+\textit{F}(\alpha+\sum_j(\beta_i*X_ij)) $. The function $\textit{F(z)}$
+is a cumulative logistic distribution, $\textit{X}_ij$ represents a matrix 
+of observation-related independent variables, $\alpha$ and $\beta_j$ are the
+parameters to be estimated in the model. In the present study, pain reliever 
+misuse and abuse was assessed along a continuum by aggregating responses for 
+several related binary measures into a single variable. Similarly, binary 
+responses for related independent measures were summed, creating several 
+aggregated variables as predictors in a linear regression model, rather than 
+a logit model. The general linear model (Ordinary Least Squares) estimates 
+the coefficients of the independent variables in relation to the dependent 
+variable, with some degree of error, in the following form: 
 
 \begin{equation}
   \ Y_i = \beta_1 + \beta_2X_2 +\beta_3X_3 +... + \beta_iX_ij + u_i
@@ -139,35 +145,36 @@ variables in relation to the dependent variable, with some degree of error.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Generalized Least Squares Model}
-
 The classical linear regression model is based on several assumptions, 
-including: the model is linear in the parameters, the fixed x-values are 
-independent of the error term, the mean value of the error terms is zero, 
-non-collinearity among the independent variables, and independent 
-observations (i.e., non-autocorrelation). An important assumption for the 
-present study, is that the disturbances $u_i$ all have the same variances 
-(i.e., \emph{homoscedasticity}) \citeN{gujarati09}. Heteroscedastic 
-(\emph{non-equal}) variances is a common occurrence in socio-economic 
+including: (a) the model is linear in the parameters, (b) the fixed x-values 
+are independent of the error term, (c) the mean value of the error terms is 
+zero, (d) constant variance of error terms (i.e., \emph{homoscedasticity}) 
+(e) non-collinearity among the independent variables, (f) independent 
+observations (i.e., non-autocorrelation), and (g) the x-values are not all 
+the same \citeN{gujarati09}. An important assumption for the present study is 
+that the disturbances $u_i$ all have the same variances. Heteroscedastic 
+(i.e., \emph{non-equal}) variances is a common occurrence in socioeconomic 
 variables measured in cross-section, but can also arise due to skewness in 
 the distribution of one or more regressors in the model, or from incorrect 
 functional form (e.g., linear versus log-linear models). Outliers can also 
 contribute to heteroscedasticity. If the assumption of homoscedasticity is 
-not met, the ordinary least squares (OLS) parameter estimates (though still 
-linear and unbiased) are no longer ``best'', are not efficient as they do 
-not provide the minimum variance, and yield unreliable statistics. 
+not met, the ordinary least squares (OLS) parameter estimates are no longer 
+``best'', are not efficient as they do not provide the minimum variance, 
+and produce unreliable statistics. 
 
-In the presence of heteroscedasticity, Weighted Least Squares (WLS)-a subset 
-of Generalized Least Squares (GLS)-provides estimates with a smaller variance 
+In the presence of heteroscedasticity, Weighted Least Squares (WLS)$-$a subset 
+of Generalized Least Squares (GLS)$-$provides estimates with a smaller variance 
 to replace the OLS estimators.  To control for heteroscedasticity using WLS, 
 first the primary contributing variable(s) must be identified; then an 
 appropriate transformation is carried out on the data to correct for 
 heteroscedasicity. OLS is then applied to the transformed data. WLS provides 
-estimates which are ``best'', ``linear'', ``unbiased'' (i.e., \textit{BLUE}). 
-A common ad hoc assumption with WLS is that the error variance is proportional 
-to the square of one of the explanatory variables: $\sigma^2=(\sigma^2(X_ij^2))$ 
-\cite{gujarati09}. The original model is transformed by dividing through 
-by the explanatory variable $X_i$:
+estimates which are \textit{best}, \textit{linear}, \textit{unbiased} (i.e., 
+``BLUE''). A common ad hoc assumption with WLS is that the error variance is 
+proportional to the square of one of the explanatory variables: 
+$\sigma^2=(\sigma^2(X_ij^2))$ \cite{gujarati09}. The original model is 
+transformed by dividing through by the explanatory variable $X_i$. In the 
+present study, it was assumed that Age primary variable contributing to 
+heteroscedasticity, and WLS transformations were used to construct the model.
 
 \begin{equation}
   \ Y_i/X_2 = \beta_1/X_2 + \beta_2 +\beta_3X_3/X_2 +... + \beta_iX_ij/X_2 + u_i/X_2
@@ -178,22 +185,24 @@ by the explanatory variable $X_i$:
 \subsection{National Survey on Drug Use and Health} 
 
 Data for the study was derived from the National Survey on Drug Use and Health 
-(NSDUH) from 2015 and 2016$-$obtained from the Substance Abuse and Mental Health 
-Data Archive (SAMHDA) \cite{samhsa16}. The NSDUH consists of over 2600 variables 
-covering all aspects of substance use, misuse, dependency, abuse, and addiction 
-for tobacco, alcohol, medications and illicit drugs, including comprehensive
-demographic information, including health, mental health, substance treatment
-and counseling. According to the NSDUH codebook, sampling was weighted across 
-states by population size for a representative distribution selected from 6,000 
-area segments. The sample design used five state sample size groups, drawing more 
-heavily from the eight states with the largest population (e.g., CA, FL, IL, MI, 
-NY, OH, PA, TX) which together account for 48 percent of the total U.S. population 
-aged 12 or older. All identifying information in the public data set were 
-collapsed (e.g., age categories) and state identifiers were removed from the public 
-use file to ensure confidentiality. The NSDUH public-use files do not include 
-geographic location, or demographic variables related to ethnicity or immigration 
-status. For the purposes of the present study, approximately 90 variables from the 
-NSDUH were selected and aggregated to construct a data set of 20 variables. 
+(NSDUH) from 2015 and 2016$-$obtained from the Substance Abuse and Mental 
+Health Data Archive (SAMHDA) \cite{samhsa16}. The NSDUH consists of over 2600 
+variables covering all aspects of substance use, misuse, dependency, abuse, 
+and addiction for tobacco, alcohol, medications and illicit drugs, including 
+comprehensive demographic information, including health, mental health, 
+substance treatment and counseling. According to the NSDUH codebook, sampling 
+was weighted across states by population size for a representative distribution 
+selected from 6,000 area segments. The sample design used five state sample size 
+groups, drawing more heavily from the eight states with the largest population 
+(e.g., CA, FL, IL, MI, NY, OH, PA, TX) which together account for 48 percent of 
+the total U.S. population aged 12 or older. All identifying information in the 
+public data set were collapsed (e.g., age categories) and state identifiers were 
+removed from the public use file to ensure confidentiality. The NSDUH public-use 
+files do not include geographic location, or demographic variables related to 
+ethnicity or immigration status. For the purposes of the present study, 
+approximately 90 variables from the NSDUH were selected and aggregated to 
+construct a data set of 20 variables, 16 of which were used to construct the 
+regression model (see Table 1). 
 
 \begin{table*}[ht]
   \caption{Summary Statistics for Aggregated Variables for Full Sample and 
@@ -224,45 +233,50 @@ NSDUH were selected and aggregated to construct a data set of 20 variables.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Study Goals} 
 
-The main goal was to assess demographic and environmental features as 
-predictors of pain reliever misuse and abuse. It was hypothesized that 
-demographic variables such as marital status and education level may play a 
-preventive role associated with decreased pain reliever misuse and abuse. 
-Based on past findings that misuse of prescription opioids varies by age, 
-age group was an important covariant in the model, which was believed to be a
-primary contributor to heteroscedasticity; WLS transformations were used to 
-correct for heteroscedasticity due to age category. Pain reliever misuse and 
-abuse was expected to decrease with age. Use of non-opiod medications and 
-illicit drugs was predicted to be positively associated with pain reliever 
-misuse; heroin use was expected to be highly correlated with pain reliever 
-misuse and abuse. The analysis also examined the subset of individuals who 
-reported ever misusing or abusing pain relievers in the past. Finally, 
-separate regression models were constructed for each age group to examine 
-differences in the relative influence of predictors across different subsets. 
+The main goal of the study was to analyze the contributions of demographic 
+features, medications, and illicit drugs as predictors of pain reliever misuse 
+and abuse. It was hypothesized that demographic variables such as marital 
+status and education level may play a preventive role in decreasing pain 
+reliever misuse and abuse. As described above, past findings indicate that 
+misuse of prescription opioids varies by age, and age group was considered as 
+an important covariant in the model contributing to heteroscedasticity. WLS 
+transformations were used to correct for heteroscedasticity due to age category. 
+Pain reliever misuse and abuse was expected to decrease with age. It was 
+predicted that use of non-opiod medications and illicit drugs would be 
+related to increased pain reliever misuse and abuse. Specifically, 
+heroin use was expected to be highly correlated with misuse and abuse of 
+opioid pain relievers. Analyses were conducted using the full sample and the
+subset of individuals who reported ever misusing or abusing pain relievers. 
+Finally, separate regression models were constructed for each age group 
+to examine differences in the relative contribution of the predictor variables 
+across different subsets for each age group. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Method}
 
-The following step were included in the project workflow: (1) Data cleaning and 
-preparation, (3) Exploratory data analysis, (3) Data Visualization, and (4) 
-Construction of regression models for opioid pain reliever misuse and abuse. 
+The following step were included in the project workflow: (1) Data cleaning 
+and preparation, (3) Exploratory data analysis, (3) Data Visualization, and 
+(4) Construction of regression models for opioid pain reliever misuse and 
+abuse. 
 
 \subsection{Data Cleaning and Preparation }
 
-The data was extracted and prepared using an interactive Python notebook 
-\cite{mckinney17}. NSDUH data files for 2015 and 2016 were downloaded from 
-the SAMHDA website \cite{samhsa16} URL, and saved as data frame objects in 
+The data was extracted, cleaned and prepared using an interactive Python 
+notebook \cite{mckinney17}. NSDUH data files for 2015 and 2016 were downloaded 
+from the SAMHDA website \cite{samhsa16}, and saved as data frame objects in 
 Pandas. The initial data files consisted of 57,146 observations from 2015, 
 and 56,897 observations for 2016, with over 2,600 features. The data was 
 subset by columns, selecting approximately 90 variables that included 
 demographic information, health, mental health, medication use, illicit drug 
-use, and treatment for drugs or alcohol or mental health. The following steps 
-were taken to detect and remove inconsistencies in the data: (a) Remove missing 
-values (i.e., NaN); (b) Recode blanks, non-responses, or legitimate skips 
-(e.g., 99, 991, 993) to zero; (c) Recode dichotomous responses (Yes=1 / 
-No=0) so that No=0; (d) Recode categorical variables to be consistent with 
-amount or degree (1=low, 2=med, 3=high); (e) Rename selected variables for 
-better description (e.g., Major Depressive Episode Lifetime = DEPMELT).
+use, and treatment for drugs or alcohol or mental health (a complete list of
+variables is described in a data codebook \citeN{shiverick18}). The following 
+steps were taken to detect and remove inconsistencies in the data: (a) 
+Remove missing values (i.e., \textit{NaN}); (b) Recode blanks, non-responses, 
+or legitimate skips (e.g., 99, 991, 993) to zero; (c) Recode dichotomous 
+responses (0 = No, 1 = Yes); (d) Recode categorical variables to be consistent 
+with amount or degree (1 = Low, 2 = Medium, 3 = High); (e) Rename selected 
+variables for better description (e.g., DEPMELT = Major Depressive Episode 
+Lifetime).
 
 \subsubsection{Aggregated Variables} 
 
@@ -271,34 +285,36 @@ variables; Table 1 lists the initial set of variables and range of scores.
 For example, a measure of overall health was created by combining any previous 
 health problems (e.g., STDs, Hepatitis, HIV, Cancer, Hospitalization). Overall 
 mental health was assessed as a combination of any adult major depressive 
-episode, severe emotional distress, suicidal thoughts, or plans. The use of any 
-prescription opioid pain reliever medications taken in past year (`PRLANY`) was 
-assessed by summing ten of the most commonly used opioids (e.g., Hydrocodone, 
+episode, severe emotional distress, and suicidal thoughts, or plans. The use of 
+any prescription opioid pain reliever medications taken in past year (PRLANY) 
+was assessed by summing ten of the most commonly used opioids (e.g., Hydrocodone, 
 Oxycodone, Tramadol, Morphine, Fentanyl, Oxymorphone, Demerol, Hydromorphone). 
 The main dependent variable, pain reliever misuse and abuse (PRLMISAB), was 
 based on the self-reported non-medical use of prescription opioids not directed 
-by a physician, use of pain relievers in amounts greater than prescribed, misuse 
-of pain relievers in the past year or month, dependence or abuse of pain 
-relievers, and use of pain relievers to ``get high''. Similar aggregated measures 
-were constructed for the use and misuse of prescription Tranquilizers, Sedatives, 
-Heroin (HEROINUSE), Cocaine, Amphetamines, and Hallucinogens. Drug or alcohol 
-treatment was summed across different treatment contexts (e.g., Inpatient, 
-Outpatient, Hospital, MH Clinic, ER, Drug Treatment Status). The aggregated 
-variables were described in detail in a data codebook \citeN{shiverick18}. 
+by a physician, use of pain relievers in amounts greater than prescribed, 
+misuse of pain relievers in the past year or month, dependence or abuse of 
+pain relievers, and use of pain relievers to ``get high''. Similar aggregated 
+measures were constructed for the use and misuse of prescription Tranquilizers, 
+Sedatives, Heroin (HEROINUSE), Cocaine, Amphetamines, and Hallucinogens. Drug 
+or alcohol treatment was summed across different treatment contexts (e.g., 
+Inpatient, Outpatient, Hospital, MH Clinic, ER, Drug Treatment Status). 
+Similarly, responses for mental health treatment or counseling were summed
+across different treatment settings. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsubsection{Data Subsets} 
  
 The data files were subset to select only respondents who indicated using
-any prescription opioid pain reliever; 13,916 individuals (24.35\%) from 2015 
-and 11,690 individuals (20.54\%) from 2016 were combined into a single file, 
-providing a pooled, cross-sectional sample of N=25,606 observations. Preliminary 
-examination of the data revealed 174 outliers that exceeded the range of the 
-dependent variable and were excluded. The revised sample consisting of N=25,432 
-observations (10655 male, 14777 female) with 17 variables was exported to CSV 
-file. An additional data subset consisted of N=6,964 individuals who reported 
-misusing or abusing prescription opioids (i.e., MUPO) at some point. 
+any prescription opioid pain relievers; \textit{n} = 13,916 individuals 
+(24.35\%) from 2015 and \textit{n} = 11,690 individuals (20.54\%) from 2016 
+were combined into a single file, providing a pooled, cross-sectional sample 
+of N=25,606 observations. Preliminary examination of the data revealed 174 
+outliers that exceeded the range of the dependent variable and were excluded. 
+The revised sample consisting of \textit{N} = 25,432 observations (10,655 male, 
+14,777 female) with 17 variables was exported to CSV file. An additional data s
+ubset consisted of \textit{N} = 6,964 individuals who reported misusing or 
+abusing prescription opioids (i.e., MUPO). 
 
 \begin{figure}[!ht]
   \centering\includegraphics[width=\columnwidth]{images/Figure1.pdf}
@@ -312,53 +328,46 @@ misusing or abusing prescription opioids (i.e., MUPO) at some point.
 
 \subsection{Exploratory Data Analysis}
 
-Overall, the majority of individuals reported never misusing or abusing 
-prescription opioids, but 27.25\% of individuals reported pain reliever misuse
-and abuse. Figure 1 shows that the proportion of pain reliever misuse 
-or abuse was highest for individuals between 18 to 25 years, and decreased
-with age. In general, pain reliever misuse and abuse was higher among younger 
-than older age groups. More women (61\%) than men (39\%) reported using any
-prescription opioid pain relievers, but equal proportions of men and women 
-(50\%) reported misuse and abuse of opioid pain relievers. Table 2 provides 
-the summary statistics of aggregated variables measured on a scale for both 
-the full sample and the MUPO subset. The mean and standard deviation for the 
-dependent variable are more robust in the MUPO subset than the full sample.  
+Overall, 27.3\% of the initial sample reported misusing or abusing 
+prescription opioid pain relievers; however, the majority of individuals 
+reported no pain reliever misuse or abuse. In general, pain reliever misuse 
+and abuse was higher among younger age groups than older respondents. As shown 
+in Figure 1, the proportion of pain reliever misuse or abuse was highest 
+between 18 to 25 years, and decreased with age. More women (61\%) than men 
+(39\%) reported using any prescription opioid medications, but equal 
+proportions of men and women (50\%) reported pain relievers misuse and abuse. 
+Table 2 provides summary statistics of the aggregated variables measured on 
+a scale for both the full sample and the MUPO subset. As seen in Table 2, 
+the mean and standard deviation for the dependent variable are more robust 
+in the MUPO subset than the full sample.  
 
 \begin{figure}[!ht]
   \centering\includegraphics[width=\columnwidth]{images/Figure2.pdf}
   \caption{Proportion of Individuals Reporting Pain Reliever Misuse
-  and Abuse and Heroin Use (N=25,432}
+  and Abuse and Heroin Use (N=25,432)}
   \label{f:Figure2}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Figure 2 shows the proportion of individuals who reported misusing prescription 
-opioid pain relievers and also using heroin. The left column of the Figure 1 
-shows the majority of respondents (89 percent) stated they had never misused 
-opioid pain medication or used heroin, although 10 percent reported misusing 
-opioid pain medication at some point. The right panel of Figure 1 shows that, 
-of those individuals who reported using heroin, the proportion who reported 
-misusing opioid pain medication was roughly twice as large as the proportion 
-who reported only using heroin. This is consistent with the hypothesized 
-link misuse of prescription opioids and heroin use. 
-
-\begin{figure}[!ht]
-  \centering\includegraphics[width=\columnwidth]{images/Figure3.pdf}
-  \caption{Plot of Residuals versus Predicted Values of the Dependent Variable: 
-  Pain Reliever Misuse and Abuse (N=25,432)}
-  \label{f:Figure3}
-\end{figure}
+Figure 2 shows the proportion of individuals who reported ever misusing 
+prescription opioid pain relievers and/or ever using heroin. The left side 
+of Figure 2 shows that the majority of respondents (75\%) had never misused 
+opioid pain relievers or used heroin. As described above, approximately 
+one-quarter of the initial sample reported misusing opioid pain relievers at 
+some point. Although relatively few individuals reported ever using heroin 
+(4.7\% overall, 692 males, 505 females), the right side of Figure 2 shows 
+that the proportion of individuals who had used heroin and misused pain 
+relievers was more than three times greater than the proportion who reported
+using heroin not not misusing opioid pain relievers. In addition, the 
+proportion of pain reliever misuse and abuse for those who had ever used 
+heroin was significantly greater than those than for those who had not, 
+which is consistent with the hypothesis that the misuse of prescription 
+opioids and heroin use are linked. (Note: some predictor variables used for
+exploratory analysis were excluded from the regression models presented in 
+the following section: e.g., PRLMISEVR, HEROINEVR). 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Although relatively few individuals in the sample reported ever using heroin 
-(4.7\% overall, 692 males, 505 females), Figure 2 shows that the proportion of 
-pain reliever misuse and abuse was higher for individuals who had used heroin 
-than for those who had not, which is consistent with the hypothesized link 
-between misuse of prescription opioids and heroin use. (Note: some predictor 
-variables used for EDA were excluded from regression analysis;
-e.g, PRLMISEVR, HEROINEVR). 
 
 \begin{table*}[ht]
   \caption{Weighted Least Squares (WLS) Parameter Estimates for Regression 
@@ -398,67 +407,73 @@ e.g, PRLMISEVR, HEROINEVR).
 
 \subsubsection{Initial OLS Regression on the Full Sample} 
  
-After loading the project data into SAS, pain reliever misuse and abuse was 
-regressed on the 16 independent variables using OLS with the full sample; 
-this regression was statistically significant, \textit{F}(16, 24947) = 
+All regression models were constructed in SAS. First, pain reliever misuse and 
+abuse was regressed on the 16 independent variables using OLS with the full 
+sample; this regression was statistically significant, \textit{F}(16, 24947) = 
 520.47, \textit{p} $<$ 0.0001, ($R^2$ = 0.2504, adjusted $R^2$ = 0.2498). The 
 variance inflation values and condition index were all within acceptable ranges, 
-and the t-values for all but one independent variable in the OLS model was 
-statistically significant, which indicated that near multicollinearity was 
-not an issue in the data set. Examination of the residuals plotted against 
-the predicted values of the dependent variable revealed an additional outlier 
-that was removed. The White`s test and Goldfield-Quandt test were significant
-(see Technical Appendix), which indicated heteroscedasticity in the data; 
-however, the plot of the residuals versus predicted values of tbe dependent
-variable, PRLMISAB in Figure 4, shows a bimodal trend in the variances that 
-decreased over the predicted values. In addition, some of the residual values 
-were negative. As stated in the Introduction, heteroscedasticity can occur 
-due to skewness in one or more regressors included in the model. The 
-Durbin-Watson test was also significant, which indicated autocorrelation 
-in the data, perhaps owing to model misspecification due to excluded 
-variables. 
+and the t-values for all but one regressor in the OLS model were significant, 
+which indicated that near multicollinearity was not an issue in the data set. 
+Examination of the residuals plotted against the predicted values of the 
+dependent variable revealed an additional outlier that was removed (Figure 3). 
+The White`s test and Goldfield-Quandt test were both significant (see Technical 
+Appendix), which indicated heteroscedasticity in the data; however, the plot 
+of the residuals versus predicted values of the dependent variable, PRLMISAB 
+in Figure 3, shows a bimodal trend in the variances that decreased over the 
+predicted values. Some of the residual values were negative. As stated above, 
+heteroscedasticity can occur due to skewness in one or more regressors in the 
+model. The Durbin-Watson test was also significant, which indicated 
+autocorrelation in the data, perhaps owing to model misspecification due to 
+excluded variables. 
+
+\begin{figure}[!ht]
+  \centering\includegraphics[width=\columnwidth]{images/Figure3.pdf}
+  \caption{Plot of Residuals versus Predicted Values of the Dependent Variable: 
+  Pain Reliever Misuse and Abuse (\textit{N} = 25,432)}
+  \label{f:Figure3}
+\end{figure}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsubsection{Weighted Least Squares (WLS) Regression} 
 
-To address heteroscedasticity, WLS transformations were applied to the data, 
-based on the assumption that Age Category was the variable primarily 
-contributing to heteroscedasticity. The WLS regression was conducted using 
-PROC MODEL in SAS, yielded a statistically significant relationship between 
-Pain Reliever Misuse and Abuse and the independent variables, 
-\textit{F}(16, 24947) = 542, \textit{p} $<$ 0.0001 ($R^2$ = 0.2437, 
-adjusted $R^2$ = 0.2425). The WLS transformation reduced heteroscedasticity 
-from the initial OLS model, but it was not completely eliminated from the data. 
-The WLS parameter estimates for the full sample given on the left side of 
-Table 3 show that Education Level, Size of City/Metropolitan area, and Health 
-Problems  were not significant predictors of pain reliever misuse and abuse. 
-To focused on opioid pain reliever misuse and abuse, the next analysis focused 
-on the  subset of misuse and abuse of prescription opioids (MUPO). 
+To address heteroscedasticity, WLS transformations were applied to the 
+data, based on the assumption that Age Category was primarily contributing to 
+heteroscedasticity. The WLS regression was conducted using PROC MODEL in SAS, 
+and yielded a statistically significant relationship between Pain Reliever 
+Misuse and Abuse and the independent variables, \textit{F}(16, 24947) = 542, 
+\textit{p} $<$ 0.0001 ($R^2$ = 0.2437, adjusted $R^2$ = 0.2425). The WLS 
+transformation reduced heteroscedasticity from the initial OLS model, but it 
+was not completely eliminated from the data. The WLS parameter estimates for 
+the full sample given on the left side of Table 3 show that Education Level, 
+Size of City/Metropolitan area, and Health Problems were not significant 
+predictors of pain reliever misuse and abuse. To focus on prescription opioid 
+misuse and abuse, the next analysis used the subset of respondents who
+misused or abused prescription opioids (MUPO). 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsubsection{Regression Models for the MUPO Subset} 
+\subsubsection{Regression Model for the MUPO Subset} 
 
-The following regressions were conducted on the subset of N=6,478 individuals 
-who reported MUPO. The OLS regression on the MUPO subset was statistically 
-significant, \textit{F}(16, 6461) = 51.69, \textit{p}$<$ 0.0001, ($R^2$ = 
-0.1135, adjusted $R^2$ = 0.1113). The White’s test and Goldfield-Quandt tests 
-were both statistically significant, indicating that the heteroscedasticity 
-was an issue in the MUPO subset, and the OLS estimates would not be best or 
-efficient. The WLS transformation was used to correct for heteroscedasticity 
-due to Age Group. The WLS regression revealed a statistically significant 
+The following regressions were conducted with the subset of \textit{N} = 6,478 
+individuals who reported MUPO. The OLS regression on the MUPO subset was 
+statistically significant, \textit{F}(16, 6461) = 51.69, \textit{p} $<$ 0.0001, 
+($R^2$ = 0.1135, adjusted $R^2$ = 0.1113). The White`s test and Goldfield-Quandt 
+tests were both statistically significant, which indicated heteroscedasticity 
+in the MUPO subset. The WLS transformation was used to correct for 
+heteroscedasticity due to Age Group. The WLS regression revealed a significant 
 relationship between Pain Reliever Misuse and Abuse and the independent 
 variables, \textit{F}(16, 6462) = 51.95, \textit{p} < 0.0001 ($R^2$ = 0.1076, 
-adjusted $R^2$ = 0.1056). WLS parameter for the MUPO subset are given in the 
-right side of Table 3, which shows that the key demographic features were 
+adjusted $R^2$ = 0.1056). The WLS parameter for the MUPO subset provided in 
+the right side of Table 3 shows that the key demographic features were 
 negatively related to pain reliever misuse and abuse, whereas medication 
 use and use of illicit drugs was positively related to pain reliever misuse 
 and abuse. 
 
 \begin{table}
-  \caption{WLS Parameter Estimates for Final Model of Pain Reliever Misuse and Abuse 
-  with MUPO Subset (N=6964)}
+  \caption{WLS Parameter Estimates for Final Model of Pain Reliever Misuse and 
+  Abuse with MUPO Subset (N=6964)}
   \label{tab:freq}
   \begin{tabular}{llll}
     \toprule
@@ -524,7 +539,7 @@ and abuse.
 
 \subsection{Final Model: WLS for the MUPO subset}
 
-The final WLS model was obtained by excluding the non-significant independent 
+The final model was obtained by excluding the non-significant independent 
 variables from the previous WLS regression on the MUPO subset. The final WLS 
 regression demonstrated a significant relationship between Pain Reliever Misuse 
 and Abuse and the independent variables, \textit{F}(16, 6462) = 51.95, 
@@ -549,7 +564,7 @@ Pain Reliever Misuse and Abuse in the MUPO subset. A one-unit increase in Any
 Pain Reliever Misuse or Abuse yielded a 0.289 unit increase in PRLMA, holding 
 other variables constant. Likewise, a one-unit increase in Tranquilizer use was 
 linked to a 0.114 unit increase in PRLMA. In terms of illicit drugs, a one-unit 
-increase in Heroin use was associated with a 0.244 unit increase in PRLMA as 
+increase in Heroin use was associated with a 0.244 unit increase in PRLMA, as 
 expected, holding constant the effects of other independent variables. 
 A one-unit increase in Cocaine use was associated with a 0.102 increase in PRLMA. 
 Finally, a one-unit increase in Amphetamine use was related to a 0.231 unit 
@@ -559,119 +574,135 @@ increase in Pain Reliever Misuse and Abuse.
 
 \subsubsection{Final Regression Model by Age Category for MUPO Subset}
 
-Separate regressions were conducted for each Age Category using the set of
-regressors identified as significant in the Final WLS model. Table 5 provides 
-the OLS parameter estimates with standardized betas in parentheses, F-test, 
-$R^2$, adjusted $R^2$, and significance level of the estimates. As shown in 
-Table 5, the parameter estimates for demographic characteristics and drug use 
-varied by age group, and the standardized betas (in parentheses) give 
-an indication of their relative influence. In terms of demographics features, 
-Sex was significantly negatively related to Pain Reliever Misuse and Abuse 
-(PRLMISAB) for individuals between 18 to 36 years and over age 50, but had the
-largest effect between 26 to 35 years. Marital status was negatively related 
-to PRLMISAB only for individuals between 18-26, but not older individuals. 
-Education level was also negatively related to PRLMISAB only for individuals 
-age 36 years and higher, and this effect was greater for age 50 or older. 
-Medications and drugs were positively associated with the dependent variable. 
-Of the variables included in the final model (with the MUPO subset), only Any 
-Pain Reliever Use and Tranquilizer Use significantly predicted PRLMISAB across 
-all age groups. Heroin Use significantly predicted PRLMISAB between the ages 
-of 18 to 49 years; the effect of heroin use was greatest between 36 to 49
-years, but was not a significant predictor for the youngest or oldest 
-respondents. Amphetamine use was a sigificant predictor of PRLMISAB between
-the 12 to 35 years of age, and this effect was largest between 12 to 17 years.
-For the youngest respondents, Amphetamine use was more influential as a 
-predictor of PRLMISAB than Any opioid Pain Reliever Use. Finally, Cocaine was 
-not a significant predictor of PRLMISAB for any age groups, although 
-COCAINE was significantly related to PRLMISAB across age categories combined. 
+Separate regressions were conducted for each age category using the set of
+predictors from the final model. Table 5 provides the OLS parameter estimates 
+with standardized betas in parentheses, F-test, $R^2$, adjusted $R^2$, and 
+significance level of the estimates. As shown in Table 5, the regression 
+model F-test was significant for every age group; however, the significance
+of the parameter estimates for the regressors varied by age group. The 
+standardized betas are given in parentheses as an indication of the relative 
+contribution of each predictor. 
+
+In general, the influence of demographic features and illicit drugs varied 
+considerably across age groups; In terms of demographic factors, Sex was a 
+significant predictor of PRLMISAB between 18 to 36 years and over age 50, with
+the largest effect observed between 26 to 35 years. Marital status 
+significantly predicted PRLMISAB only between the ages of 18-26, whereas 
+education level significantly predicted PRLMISAB only for respondents age 
+36 years and older, with the largest effect at age 50 and older. As for 
+illicit drugs, Heroin Use significantly predicted PRLMISAB between the ages 
+of 18 to 49 years; with a larger effect between 26 to 49 years. Amphetamines 
+significantly predicted PRLMISAB between 12 to 35 years, with the largest 
+effect observed in the youngest age group. Surprisingly, Cocaine was not
+a significant predictor of PRLMISAB at any age group, although it was a 
+significant predictor when age was included as a regressor in the final model. 
+
+Of the medications and illicit drugs included in the final model with the
+MUPO subset, the use of any opioid pain relievers was the only predictor of
+PRLMISAB that was significant predicted  across all age groups, and 
+contributed the greatest amount in the change/effect in the dependent variable 
+than any other regressor for the ages of 18 and above. For the youngest age
+group, between 12 to 17 years, Amphetamine use contributed more to change in 
+PRLMISAB than Use of Any opioid Pain Relievers. Between 18 to 26 years, use of
+any opioid pain relievers contributed more than Marital Status, Sex, 
+Tranquilizers, Amphetamines, or Heroin (in descending order). Between 26 to 35
+years, any opioid pain reliever contributed more than Sex which contributed the 
+second largest portion of change in the outcome, followed by Heroin, 
+Tranquilizers, and Amphetamines. Between 36 to 49 years, use of any opioid pain 
+relievers accounted for more change in the dependent variable than Heroin, 
+Tranquilizers, and Education level. Finally, for respondents age 50 and up, 
+any opioid pain reliever use conributed more than Education level, which 
+accounted for the second largest amount of change in PRLMISAB, followed by 
+Tranquilizers, and Sex, in decreasing order of contribution. 
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Discussion}
 
-The results replicated past findings that reported a rate of opioid misuse 
-of 25\% among patients legitimately prescribed opioids is the U.S. Pain reliever 
-misuse and abuse varied by age, with the highest rates between 18 to 25 years, 
-with decreasing opioid misuse in older age groups. As predicted, misuse and 
-abuse of pain relievers was also associated with heroin use, as the proportion 
-of pain reliever misuse and abuse was higher for individuals who had used heroin 
-than those who had not. The final model of the regression analysis revealed that, 
-for respondents who self-reported misuse of pain relievers, demographic factors 
-such as age, sex, marital status, and education were associated with decreased 
-pain reliever misuse and abuse overall, which is consistent with hypothesis. 
-The influence of demographic factors on pain reliever misuse also varied across 
-age groups, with the effect of sex being larget between the ages of 26 to 36, 
-the effect of marital status between 18 to 25 years, and the effect of education 
-was highest for individuals age 50 or older. As predicted, the use of medications 
-and illicit drugs was related to increased misuse of pain relievers. The effect 
-of any previous opioid pain reliever or tranquilizer use on opioid misuse was 
-consistent across ages; however, the effect of illicit drugs varied by age. 
-For example, for individuals between 12 to 17, Amphetamines were more influential 
-as a determinant of opioid misuse than any previous pain reliever use. Heroin use
-was an influential factor in opioid misuse between the ages 18 to 36 years. 
-In the final model, Cocaine use was a significant predictor of pain reliever 
-misuse and abuse, but Cocaine was not significantly related to PRLMISAB in the 
-regression models by age group. It is interesting to note that overall, health
-problems and mental health was not related to opioid misuse, and for the subset 
-of individuals who reported misusing pain relievers, neither mental health 
-treatment nor drug and alcohol treatment were significant related to pain 
-reliever misuse and abuse. 
+The results indicated that approximately one-quarter of individuals who had 
+taken any prescribed opioid pain relievers reported misusing them, which 
+replicates past findings. Pain reliever misuse and abuse varied by age, with 
+the highest rates of misuse between 18 to 25 years, and decreased among older 
+age groups. Demographic factors such as age, sex, marital status, and education 
+level were associated with decreased pain reliever misuse and abuse, and the 
+contribution of these demographic factors varied across age groups: Sex 
+predicted PRLMISAB between 18 to 35 years, with the largest effect between the 
+ages of 26 to 35. Marital status predicted PRLMISAB only between 18 to 25 years. 
+Education level predicted PRLMISAB from age 36 and up, but had the largest 
+contribution for the ages of 50 and older. As predicted, the use of medications 
+and illicit drugs was related to increased misuse of pain relievers. Use of any 
+opioid pain relievers predicted PRLMISAB across all ages, followed by Tranqulizer 
+use, which predicted PRLMISAB for ages 18 and older. As predicted, misuse and 
+abuse of pain relievers was associated with heroin use, as the proportion of 
+pain reliever misuse and abuse was higher for individuals who had used heroin 
+than those who had not. However, in the final model, with the MUPO subset, 
+cocaine and amphetamines were more influential predictors of PRLMISAB than heroin.
+The effect of illicit drugs varied by age. Heroin predictor of PRLMISAB between 
+the ages 18 to 36 years; however, Amphetamines contributed more to predicting 
+PRLMISAB between 12 to 17 years, than any opioid pain reliever misuse. Although 
+Cocaine predicted PRLMISAB when age was included in the final model, it was 
+not a significant predictor for any of the regression models considered by age 
+group separately. It is interesting to note that, in the final model, health, 
+mental health, treatment, and counseling did not predict PRLMISAB, although 
+these regressors were significant predictors in the initial regression 
+model with the full sample. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Limitations}
 
 In selecting the best set of variables to model pain reliever misuse and abuse, 
-the resulting tradeoff was a decrease in the proportion of variance accounted 
-for (i.e., $R^2$) due to a reduction in sample size and number of independent 
-variables in each successive model. Although the final regression model was 
-based on a smaller sample, with a lower coefficient of determination, it 
-provided a parsimonious and interpretable model of opioid misuse and abuse. 
-A limitation is that mis-specification due to the exclusion of relevant variables 
-such as socioeconomic status, ethnicity, or region may have contributed to
-heteroscedasticity and autocorrelation. In future, related proxy variables could 
-be included to represent variance in the relationship of those missing variables 
-with the dependent measure. A drawback of assessing pain reliever misuse and 
-abuse on a scale, taken as the sum of several binary responses, is that many 
-aggregated variables had bimodal distributions that were highly skewed. A 
-better approach may have been to analyze the data using a logit model to obtain 
-the log odds ratios of MUPO. An initial goal of the study was to analyze trends 
-in prescription opioid misuse over time using panel data. Another limitation is 
-that the sample included NSDUH for only two years, owing to constraints of time 
-for the project, the large number of variables, and minor changes in format 
-between survey versions. Given additional time and resources, it would be 
-preferable to obtain data across multiple years, covering a five- or ten-year 
-period, using a more inclusive set of NSDUH variables to construct more 
-informative models of opioid misuse ana abuse.
+the resulting tradeoff was a decrease in the proportion of variance accounted
+for ($R^2$) due to a reduction in sample size and number of independent 
+variables in each successive model. The final regression model provided a 
+parsimonious and interpretable model of opioid misuse and abuse, though it 
+was based on a smaller sample, with a lower coefficient of determination. A 
+limitation of the study is that misspecification may occur due to the exclusion 
+of relevant variables such as socioeconomic status, ethnicity, or region
+from the model. In future, related proxy variables could be included to 
+represent variance in the relationship of those missing variables with the 
+dependent measure. Using aggregated variables may have masked the separate 
+contributions of individual features. A drawback of assessing pain reliever 
+misuse and abuse on a scale, taken as the sum of several binary responses, 
+is that many aggregated variables had bimodal distributions that were highly 
+skewed.  It may have been appropriate to analyze the data using a logit model 
+to obtain the log odds ratios of opioid pain reliever misuse and abuse. An 
+initial goal of the study was to analyze trends in prescription opioid misuse 
+over time using panel data. The sample used in this study included NSDUH for 
+only two years, which may have limited the generalizability of the findings. 
+In future, it would be preferable to combine NSDUH data across multiple years 
+to construct a more complete data set, with an inclusive set of variables, 
+to build more informative models of opioid misuse and abuse.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusion}
 
-In conclusion, demographic information, medication use, and illicit drug use 
-play different roles as determinants of prescription opioid misuse. The current
-findings suggest that personal characteristics may play a preventative role 
-in decreasing pain reliever misuse and abuse. Overall, respondents who were 
-older, female, married, with a higher level of education, were less likely to 
-misuse and abuse opioid pain relievers than their counterparts. By contrast, 
-any previous prescription opioid use, tranquilizer use, heroin, cocaine, or
-amphetamine use put people at increased risk for opioid misuse and abuse. It is 
-possible that the widespread practice of prescribing opioids for chronic pain 
-is a primary factor driving the rapid escalation of opioid addiction and abuse. 
-On the other hand, the widespread misuse and abuse of opioids may be 
-influenced by mood regulation, and maintained by physical dependence. Theories 
-of addiction suggest that situational cues or events can elicit a motivational 
-state underlying relapse, as addictive behavior are reinstated by exposure to 
-drugs, drug-related cues, or environmental stressors \cite{shaham03}. A lack of 
-continuity in treatment can leave many people in recovery at risk for relapse 
-or possible overdose as they return to the same environments and social 
-relationships associated with their drug use. The sharp increase in overdose 
-deaths in the U.S. due to synthetic opioids (other than methadone) has coincided 
-with the increased availability of illicitly manufactured fentanyl \cite{nida17}. 
-Because the dosage levels and potency of illicit opioids are largely unknown, 
-there is greater risk of drug overdose death. The present study may help
-raise awareness of personal characteristics that may help individuals overcome 
-or resist opioid misuse and dependency. Additional research is needed to better 
-understand characteristics associated with resilience in the face or opioid 
-abuse and addiction. 
+In conclusion, demographic factors, medications, and illicit drugs contributed 
+differently to the aggregated measure of prescription opioid misuse and abuse. 
+The findings are consistent with the idea that personal characteristics may 
+play a role in helping to prevent or decrease the misuse and abuse of opioids
+pain relievers. Overall, respondents who were older, female, married, with more
+education, were less likely to misuse and abuse opioid pain relievers than 
+their counterparts. By contrast, any previous prescription opioid use, 
+tranquilizer use, heroin, cocaine, or amphetamine use put people at increased 
+risk for opioid misuse and abuse. The widespread availability and prescription 
+of opioids for chronic pain is likely a primary contributing factor driving the 
+rapid escalation of opioid addiction and abuse. On the other hand, the misuse 
+and abuse of opioids may be influenced by risk factors that contribute to 
+psychological and physical dependence. Theories of addiction suggest that 
+situational cues or events can elicit a motivational state underlying relapse, 
+as addictive behavior are reinstated by exposure to drugs, drug-related cues, or 
+environmental stressors \cite{shaham03}. A lack of continuity in treatment also 
+leaves many people in recovery at risk for relapse or possible overdose as they 
+return to the same environments and social relationships associated with their 
+drug use. The sharp increase in overdose deaths in the U.S. due to synthetic 
+opioids (other than methadone) has coincided with the increased availability 
+of illicit synthetic opioid, fentanyl \cite{nida17}. Because the dosage levels 
+and potency of illicit opioids are largely unknown, there is greater risk of 
+drug overdose and death. This study may help raise awareness about personal 
+characteristics that help individuals resist opioid misuse and dependency. 
+Additional research is needed to understand factors related to resilience
+in overcoming opioid abuse and addiction. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -681,14 +712,13 @@ abuse and addiction.
 Portions of this paper were completed as part of a course project in Data 
 Analysis and Modeling taught by Dr. Barry Rubin (SPEA Connect P507) at 
 Indiana University in Spring 2018. The author would like to thank Professor 
-Rubin and Dr. Venkat Nadella the TA for helpfulf guidance and feedback on 
+Rubin and Dr. Venkat Nadella, the TA, for helpful guidance and feedback on 
 the project proposal and analysis. Thanks to Taylor Roundtree for conducting
-tests and corrections for heteroscedasticity; Abhishek Babuji completed 
-the tests and correction for autocorrelation.
+tests and corrections for heteroscedasticity.
 
 \end{acks}
 %ACM-Reference-Format
-\bibliographystyle{unsrt}
+\bibliographystyle{ACM-Reference-Format}
 \bibliography{report} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -736,38 +766,6 @@ of \textit{F}(500,200)= 1.22, at the $\alpha$ = 0.05 level; this non-significant
 result suggested there was not sufficient evidence of heteroscedasticity. 
 However, the WLS transformations was used based on the assumption that 
 Age Category was contributing to heteroscedasticity in the data.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Detection and Correction of Autocorrelation}
-
-The Durbin-Watson statistic from the initial OLS regression, \textit{d} = 0.407, 
-was less than the lower bound of \textit{d} ($d_L$ = 1.599; $d_U$ = 1.943, with 
-16 independent variables, 24964 observations) indicating evidence of positive 
-autocorrelation. Although the OLS estimators are still unbiased, consistent, 
-and asymptotically normally distributed, they are not efficient and the residual 
-variances will likely underestimate the true error variance. The value of $R^2$ 
-will be overestimated, and the \textit{t} and \textit{F} statistics unreliable. 
-As described by Gujarati and Porter, ``a significant \textit{d} statistic may not 
-necessarily indicate autocorrelation. [...] it may be an indication of omission 
-of relevant variables from the model.'' (p. 437)\cite{gujarati09}.  
-
-The Cochrane-Orcutt correction procedure (with two iterations) was used to 
-obtain the WLS parameters estimates. The first-round estimate of the 
-autocorrelation coefficient \textit{rho} was 0.798 and the Durbin-Watson 
-statistic, \textit{d} = 0.039, still indicated positive autocorrelation. The 
-second-round estimate of the autocorrelation coefficient \textit{rho} was 0.999 
-and the Durbin-Watson statistic, \textit{d} = 0.1.758, which fell in the Zone 
-of Indecision; therefore, we cannot conclude that autocorrelation does or does 
-not exist. The Durbin-Watson statistic for the Yule-Walker WLS regression was 1.09, 
-which was in the lower bound indicating positive autocorrelation. This suggests 
-that the Cochrane-Orcutt correction procedure removed more of the autocorrelation 
-than the Yule-Walker WLS regression. Finally, the parameter estimates for only 
-3 out of the 16 independent variables in the WLS regression for the Cochrane-Orcutt 
-procedure were statistically significant. In addition, the $R^2$ = 0.038, and 
-parameter estimates for only 3 independent variables were significant at the 
-0.10 level in this model. 
-
 
 
 \end{document}
